@@ -34,12 +34,15 @@
                     android:id="@+id/btnMore"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
                     android:layout_alignParentEnd="true"
+                    android:layout_marginStart="359dp"
                     android:layout_marginTop="12dp"
                     android:layout_marginEnd="12dp"
                     android:background="@drawable/bg_circle_white_blur"
-                    android:src="@drawable/ic_vertical"
-                    android:padding="8dp" />
+                    android:padding="8dp"
+                    android:src="@drawable/ic_point" />
 
                 <!-- Avatar -->
                 <de.hdodenhof.circleimageview.CircleImageView
@@ -168,18 +171,18 @@
                         android:id="@+id/btnFavorites"
                         android:layout_width="0dp"
                         android:layout_height="44dp"
+                        android:layout_marginEnd="8dp"
                         android:layout_weight="1"
                         android:text="Yêu thích"
-                        android:textSize="14sp"
                         android:textAllCaps="false"
+                        android:textColor="@android:color/black"
+                        android:textSize="14sp"
+                        app:backgroundTint="@android:color/white"
+                        app:cornerRadius="8dp"
                         app:icon="@drawable/ic_bookmark"
                         app:iconSize="16dp"
-                        app:cornerRadius="8dp"
-                        app:backgroundTint="@android:color/white"
                         app:strokeColor="#E5E5E5"
-                        app:strokeWidth="1dp"
-                        android:textColor="@android:color/black"
-                        android:layout_marginEnd="8dp" />
+                        app:strokeWidth="1dp" />
 
                     <com.google.android.material.button.MaterialButton
                         android:id="@+id/btnWardrobe"
