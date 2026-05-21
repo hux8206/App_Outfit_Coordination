@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Drawable for wave shape at bottom of login image -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="1440dp"
+    android:height="120dp"
+    android:viewportWidth="1440"
+    android:viewportHeight="120">
+
+    <path
+        android:fillColor="@android:color/white"
+        android:pathData="M0,50 C320,90 640,10 960,50 C1280,90 1600,10 1920,50 L1920,150 L0,150 Z" />
+</vector>
