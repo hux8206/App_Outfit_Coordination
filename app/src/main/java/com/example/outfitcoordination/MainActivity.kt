@@ -1,38 +1,36 @@
-package com.example.outfitcoordination.ViewModel // Đang khớp với vị trí hiện tại của bạn
-
+package com.example.outfitcoordination // Đang khớp với vị trí hiện tại của bạn
+import android.view.View
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import com.example.outfitcoordination.R
-import com.example.outfitcoordination.View.MyHome
-import com.example.outfitcoordination.View.MyFashion
-import com.example.outfitcoordination.View.MyFavorities
-import com.example.outfitcoordination.View.MyProfile
-// import com.example.outfitcoordination.View.MyWardrobe // Mở comment dòng này sau khi bạn tạo file MyWardrobe.kt nhé
-
-import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.example.outfitcoordination.View.Dashboard
+import com.example.outfitcoordination.View.Fashion
+import com.example.outfitcoordination.View.Favorites
+import com.example.outfitcoordination.View.Login
+import com.example.outfitcoordination.View.Profile
+import com.example.outfitcoordination.View.Register
+import com.example.outfitcoordination.View.Wardrobe
+import com.example.outfitcoordination.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
+    lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         // File layout của bạn đang là activity_main.xml (nhớ đảm bảo nó chứa CoordinatorLayout như thiết kế)
         setContentView(R.layout.activity_main)
-
-        val bottomNav = findViewById<BottomNavigationView>(R.id.bottomNavigation)
-        val fabFavorite = findViewById<FloatingActionButton>(R.id.fabFavorite)
-
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
         // 1. Mặc định vừa vào app là mở ngay trang chính
-        loadFragment(MyHome())
+        loadFragment(Dashboard())
 
         // 2. Xử lý chuyển trang khi click các mục trên thanh Menu
-        bottomNav.setOnItemSelectedListener { item ->
+        binding.bottomNavigation.setOnItemSelectedListener { item ->
             val fragment = when (item.itemId) {
-                R.id.nav_home -> MyHome()
-                R.id.nav_fashion -> MyFashion()
-                // R.id.nav_wardrobe -> MyWardrobe() // Mở comment sau khi bạn tạo file
-                R.id.nav_profile -> MyProfile()
+                R.id.nav_home -> Dashboard()
+                R.id.nav_fashion -> Fashion()
+                R.id.nav_profile -> Profile()
+                R.id.nav_wardrobe -> Wardrobe()
                 else -> null
             }
             if (fragment != null) {
@@ -44,16 +42,19 @@ class MainActivity : AppCompatActivity() {
         }
 
         // 3. Xử lý khi click vào nút Trái tim nổi ở giữa
-        fabFavorite.setOnClickListener {
+        binding.fabFavorite.setOnClickListener {
             // Đánh dấu check vào mục placeholder để các nút khác tự bỏ sáng
-            bottomNav.menu.findItem(R.id.nav_placeholder).isChecked = true
-            loadFragment(MyFavorities())
+            binding.bottomNavigation.menu.findItem(R.id.nav_placeholder).isChecked = true
+            loadFragment(Favorites())
         }
     }
-
     private fun loadFragment(fragment: Fragment) {
         supportFragmentManager.beginTransaction()
             .replace(R.id.fragmentContainer, fragment)
             .commit()
+        val hideNav = fragment is Login || fragment is Register
+
+        binding.bottomNavigation.visibility = if (hideNav) View.GONE else View.VISIBLE
+        binding.fabFavorite.visibility = if (hideNav) View.GONE else View.VISIBLE
     }
 }

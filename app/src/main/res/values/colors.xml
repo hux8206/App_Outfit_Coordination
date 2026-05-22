@@ -27,4 +27,10 @@
     <!-- Accent Colors -->
     <color name="red">#EF4444</color>
     <color name="red_light">#FEE2E2</color>
+
+    <color name="bottom_nav_selected">#8B5E3C</color>
+    <color name="bottom_nav_unselected">#9E9E9E</color>
+
+    <color name="tab_bg_color">#F5F0E8</color>
+    <color name="tab_text_color">#8B5E3C</color>
 </resources>

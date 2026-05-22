@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/wardrobe"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#F5F1ED">
@@ -24,23 +24,23 @@
             android:textColor="#1A1A1A"
             android:textSize="28sp"
             android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <ImageButton
             android:id="@+id/btnAdd"
             android:layout_width="44dp"
             android:layout_height="44dp"
             android:background="@drawable/bg_circle_brown"
-            android:src="@drawable/ic_add"
-            app:tint="#FFFFFF"
+            android:contentDescription="Thêm đồ mới"
             android:padding="10dp"
             android:scaleType="centerInside"
-            android:contentDescription="Thêm đồ mới"
+            android:src="@drawable/ic_add"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent" />
+            app:tint="#FFFFFF" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -48,8 +48,8 @@
         android:id="@+id/scrollCategory"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:scrollbars="none"
         android:paddingVertical="8dp"
+        android:scrollbars="none"
         app:layout_constraintTop_toBottomOf="@id/headerLayout">
 
         <com.google.android.material.chip.ChipGroup
@@ -57,45 +57,45 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingHorizontal="24dp"
-            app:singleSelection="true"
-            app:chipSpacingHorizontal="12dp">
+            app:chipSpacingHorizontal="12dp"
+            app:singleSelection="true">
 
             <com.google.android.material.chip.Chip
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Tất cả"
                 android:checked="true"
-                app:chipBackgroundColor="@color/chip_bg_color"
+                android:text="Tất cả"
                 android:textColor="@color/chip_text_color"
+                app:chipBackgroundColor="@color/chip_bg_color"
                 app:chipCornerRadius="20dp"
-                app:chipStrokeWidth="0dp"/>
+                app:chipStrokeWidth="0dp" />
 
             <com.google.android.material.chip.Chip
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Áo"
-                app:chipBackgroundColor="@color/chip_bg_color"
                 android:textColor="@color/chip_text_color"
+                app:chipBackgroundColor="@color/chip_bg_color"
                 app:chipCornerRadius="20dp"
-                app:chipStrokeWidth="0dp"/>
+                app:chipStrokeWidth="0dp" />
 
             <com.google.android.material.chip.Chip
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Quần"
-                app:chipBackgroundColor="@color/chip_bg_color"
                 android:textColor="@color/chip_text_color"
+                app:chipBackgroundColor="@color/chip_bg_color"
                 app:chipCornerRadius="20dp"
-                app:chipStrokeWidth="0dp"/>
+                app:chipStrokeWidth="0dp" />
 
             <com.google.android.material.chip.Chip
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Giày"
-                app:chipBackgroundColor="@color/chip_bg_color"
                 android:textColor="@color/chip_text_color"
+                app:chipBackgroundColor="@color/chip_bg_color"
                 app:chipCornerRadius="20dp"
-                app:chipStrokeWidth="0dp"/>
+                app:chipStrokeWidth="0dp" />
         </com.google.android.material.chip.ChipGroup>
     </HorizontalScrollView>
 

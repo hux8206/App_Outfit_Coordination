@@ -1,5 +1,5 @@
 <resources>
-    <style name="Theme.OutfitsApp" parent="Theme.MaterialComponents.Light.NoActionBar">
+    <style name="Base.Theme.OutfitCoordination" parent="Theme.MaterialComponents.Light.NoActionBar">
         <item name="colorPrimary">@color/primary_brown</item>
         <item name="colorPrimaryVariant">@color/primary_brown_dark</item>
         <item name="colorOnPrimary">@color/white</item>
