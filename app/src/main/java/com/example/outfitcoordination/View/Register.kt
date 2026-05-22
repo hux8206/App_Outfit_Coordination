@@ -37,7 +37,7 @@ class Register : Fragment() {
             if (success){
                 Toast.makeText(requireContext(),"dang ki thanh cong", Toast.LENGTH_SHORT).show()
                 parentFragmentManager.beginTransaction()
-                    .replace(R.id.main, Login()).commit()
+                    .replace(R.id.fragmentContainer, Login()).commit()
             }else{
                 Toast.makeText(requireContext(),"dang ki that bai", Toast.LENGTH_SHORT).show()
             }
@@ -45,7 +45,7 @@ class Register : Fragment() {
 
         binding.regislog.setOnClickListener {
             parentFragmentManager.beginTransaction()
-                .replace(R.id.main, Login()).commit()
+                .replace(R.id.fragmentContainer, Login()).commit()
         }
     }
 
