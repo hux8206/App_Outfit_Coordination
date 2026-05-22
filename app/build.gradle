@@ -46,6 +46,10 @@ dependencies {
     implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.7.0' // viewmodel
     implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.7.0' //livedata
     implementation 'androidx.fragment:fragment-ktx:1.8.6'
+    implementation "com.squareup.retrofit2:retrofit:2.9.0" //retrofit
+    implementation "com.squareup.retrofit2:converter-gson:2.9.0" //gson
+    implementation "androidx.lifecycle:lifecycle-runtime-ktx:2.7.0"
+    implementation "com.github.bumptech.glide:glide:4.16.0"
     implementation libs.androidx.core.ktx
     implementation libs.androidx.appcompat
     implementation libs.material
@@ -74,7 +78,4 @@ dependencies {
 
     // CircleImageView (avatar tròn)
     implementation 'de.hdodenhof:circleimageview:3.1.0'
-
-    // Gson (xử lý JSON)
-    implementation 'com.google.code.gson:gson:2.10.1'
 }

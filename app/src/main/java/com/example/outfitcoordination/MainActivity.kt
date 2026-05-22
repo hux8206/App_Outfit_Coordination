@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import com.example.outfitcoordination.View.Coordinate
 import com.example.outfitcoordination.View.Dashboard
 import com.example.outfitcoordination.View.Fashion
 import com.example.outfitcoordination.View.Favorites
@@ -52,7 +53,7 @@ class MainActivity : AppCompatActivity() {
 
                 R.id.nav_fashion -> {
                     if (isLoggedIn()) {
-                        loadFragment(Favorites())
+                        loadFragment(Fashion())
                     } else {
                         Toast.makeText(this, "Bạn cần đăng nhập", Toast.LENGTH_SHORT).show()
                     }
@@ -66,7 +67,7 @@ class MainActivity : AppCompatActivity() {
         binding.fabFavorite.setOnClickListener {
             if (isLoggedIn()) {
                 binding.bottomNavigation.menu.findItem(R.id.nav_placeholder).isChecked = true
-                loadFragment(Favorites())
+                loadFragment(Coordinate())
             } else {
                 Toast.makeText(this, "Bạn cần đăng nhập", Toast.LENGTH_SHORT).show()
                 loadFragment(Login())

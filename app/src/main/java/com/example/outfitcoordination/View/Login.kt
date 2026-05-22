@@ -15,6 +15,8 @@ import com.example.outfitcoordination.R
 import com.example.outfitcoordination.ViewModel.UserViewModel
 import com.example.outfitcoordination.databinding.FragmentLoginBinding
 import com.google.android.material.bottomsheet.BottomSheetBehavior
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
 
 class Login : Fragment() {
     private var _binding : FragmentLoginBinding? = null
@@ -77,7 +79,21 @@ class Login : Fragment() {
         viewmodel.SuccessLogin.observe(viewLifecycleOwner){success ->
             if(success){
                 Toast.makeText(requireContext(),"dang nhap thanh cong", Toast.LENGTH_SHORT).show()
-                (requireActivity() as MainActivity).loadFragment(Dashboard())
+                FirebaseFirestore.getInstance()
+                    .collection("users")
+                    .document(FirebaseAuth.getInstance().currentUser!!.uid)
+                    .get()
+                    .addOnSuccessListener { document ->
+
+                        val role = document.getString("role")
+
+                        val fragment = if (role == "admin") {
+                            Admin()
+                        } else {
+                            Dashboard()
+                        }
+                        (requireActivity() as MainActivity).loadFragment(fragment)
+                    }
             }else{
                 Toast.makeText(requireContext(),"dang nhap that bai", Toast.LENGTH_SHORT).show()
             }

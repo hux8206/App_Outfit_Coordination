@@ -9,19 +9,18 @@
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:paddingBottom="80dp">
+        android:fillViewport="true"
+        android:paddingBottom="88dp">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <!-- Cover Image & Avatar -->
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="176dp">
 
-                <!-- Cover Image -->
                 <ImageView
                     android:id="@+id/ivCover"
                     android:layout_width="match_parent"
@@ -29,22 +28,18 @@
                     android:scaleType="centerCrop"
                     android:src="@drawable/cover_image" />
 
-                <!-- More Button -->
                 <ImageButton
                     android:id="@+id/btnMore"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
-                    android:layout_alignParentStart="true"
                     android:layout_alignParentTop="true"
                     android:layout_alignParentEnd="true"
-                    android:layout_marginStart="359dp"
                     android:layout_marginTop="12dp"
-                    android:layout_marginEnd="12dp"
+                    android:layout_marginEnd="16dp"
                     android:background="@drawable/bg_circle_white_blur"
-                    android:padding="8dp"
+                    android:padding="9dp"
                     android:src="@drawable/ic_point" />
 
-                <!-- Avatar -->
                 <de.hdodenhof.circleimageview.CircleImageView
                     android:id="@+id/ivAvatar"
                     android:layout_width="96dp"
@@ -52,202 +47,322 @@
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="80dp"
                     android:src="@drawable/avatar_placeholder"
-                    app:civ_border_width="4dp"
-                    app:civ_border_color="#F5F1ED" />
+                    app:civ_border_color="#F5F1ED"
+                    app:civ_border_width="4dp" />
             </RelativeLayout>
 
-            <!-- Profile Info -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:paddingHorizontal="24dp"
-                android:paddingTop="56dp">
-
-                <!-- Name & Username -->
+                android:paddingHorizontal="24dp">
 
                 <TextView
                     android:id="@+id/profileName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
-                    android:layout_marginBottom="4dp"
-                    android:text="Anna Nguyen"
-                    android:textColor="@android:color/black"
-                    android:textSize="20sp" />
+                    android:layout_marginTop="8dp"
+                    android:text="Người dùng"
+                    android:textColor="#1A1A1A"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/profileEmail"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="4dp"
                     android:layout_marginBottom="24dp"
-                    android:text="annanguyen"
+                    android:text="email@example.com"
                     android:textColor="#999999"
                     android:textSize="14sp" />
 
-                <!-- Stats -->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
+                    android:layout_marginBottom="24dp"
+                    android:background="@drawable/bg_round_white"
                     android:gravity="center"
-                    android:paddingBottom="24dp"
-                    android:background="@drawable/border_bottom">
+                    android:orientation="horizontal"
+                    android:paddingVertical="18dp">
 
                     <LinearLayout
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:orientation="vertical"
-                        android:gravity="center">
+                        android:gravity="center"
+                        android:orientation="vertical">
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="24"
+                            android:textColor="#1A1A1A"
                             android:textSize="20sp"
-                            android:textColor="@android:color/black" />
+                            android:textStyle="bold" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_marginTop="4dp"
                             android:text="Posts"
-                            android:textSize="12sp"
-                            android:textColor="#999999" />
+                            android:textColor="#999999"
+                            android:textSize="12sp" />
                     </LinearLayout>
 
                     <LinearLayout
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:orientation="vertical"
-                        android:gravity="center">
+                        android:gravity="center"
+                        android:orientation="vertical">
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="48"
+                            android:textColor="#1A1A1A"
                             android:textSize="20sp"
-                            android:textColor="@android:color/black" />
+                            android:textStyle="bold" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_marginTop="4dp"
                             android:text="Outfits"
-                            android:textSize="12sp"
-                            android:textColor="#999999" />
+                            android:textColor="#999999"
+                            android:textSize="12sp" />
                     </LinearLayout>
 
                     <LinearLayout
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:orientation="vertical"
-                        android:gravity="center">
+                        android:gravity="center"
+                        android:orientation="vertical">
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="12"
+                            android:textColor="#1A1A1A"
                             android:textSize="20sp"
-                            android:textColor="@android:color/black" />
+                            android:textStyle="bold" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_marginTop="4dp"
                             android:text="Lookbooks"
-                            android:textSize="12sp"
-                            android:textColor="#999999" />
+                            android:textColor="#999999"
+                            android:textSize="12sp" />
                     </LinearLayout>
                 </LinearLayout>
 
-                <!-- Action Buttons -->
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginTop="24dp"
-                    android:layout_marginBottom="24dp">
+                    android:layout_height="44dp"
+                    android:layout_marginBottom="24dp"
+                    android:orientation="horizontal">
 
                     <com.google.android.material.button.MaterialButton
                         android:id="@+id/btnFavorites"
                         android:layout_width="0dp"
-                        android:layout_height="44dp"
-                        android:layout_marginEnd="8dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginEnd="6dp"
                         android:layout_weight="1"
                         android:text="Yêu thích"
                         android:textAllCaps="false"
-                        android:textColor="@android:color/black"
+                        android:textColor="#1A1A1A"
                         android:textSize="14sp"
                         app:backgroundTint="@android:color/white"
-                        app:cornerRadius="8dp"
+                        app:cornerRadius="12dp"
                         app:icon="@drawable/ic_bookmark"
+                        app:iconGravity="textStart"
                         app:iconSize="16dp"
-                        app:strokeColor="#E5E5E5"
-                        app:strokeWidth="1dp" />
+                        app:iconTint="#1A1A1A" />
 
                     <com.google.android.material.button.MaterialButton
                         android:id="@+id/btnWardrobe"
                         android:layout_width="0dp"
-                        android:layout_height="44dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginStart="6dp"
                         android:layout_weight="1"
                         android:text="Tủ đồ"
-                        android:textSize="14sp"
                         android:textAllCaps="false"
-                        app:icon="@drawable/ic_grid"
-                        app:iconSize="16dp"
-                        app:cornerRadius="8dp"
-                        app:backgroundTint="#8B7355"
                         android:textColor="@android:color/white"
-                        android:layout_marginStart="8dp" />
+                        android:textSize="14sp"
+                        app:backgroundTint="#8B7355"
+                        app:cornerRadius="12dp"
+                        app:icon="@drawable/ic_grid"
+                        app:iconGravity="textStart"
+                        app:iconSize="16dp"
+                        app:iconTint="@android:color/white" />
                 </LinearLayout>
 
-                <!-- Wardrobe Grid -->
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/rvWardrobe"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="24dp" />
-
-                <!-- Settings Menu -->
                 <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:cardCornerRadius="16dp"
-                    app:cardElevation="0dp"
+                    android:layout_marginBottom="18dp"
                     app:cardBackgroundColor="@android:color/white"
-                    android:layout_marginBottom="16dp">
+                    app:cardCornerRadius="16dp"
+                    app:cardElevation="0dp">
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="vertical">
 
-                        <!-- Settings Items here -->
-                        <!-- Repeat for each menu item -->
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="56dp"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal"
+                            android:paddingHorizontal="16dp">
 
+                            <ImageView
+                                android:layout_width="22dp"
+                                android:layout_height="22dp"
+                                android:src="@drawable/ic_settings"
+                                app:tint="#344054" />
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="12dp"
+                                android:layout_weight="1"
+                                android:text="Cài đặt"
+                                android:textColor="#1A1A1A"
+                                android:textSize="15sp" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="›"
+                                android:textColor="#98A2B3"
+                                android:textSize="26sp" />
+                        </LinearLayout>
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:background="#F0F0F0" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="56dp"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal"
+                            android:paddingHorizontal="16dp">
+
+                            <ImageView
+                                android:layout_width="22dp"
+                                android:layout_height="22dp"
+                                android:src="@drawable/ic_user"
+                                app:tint="#344054" />
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="   Thông tin cá nhân"
+                                android:textColor="#1A1A1A"
+                                android:textSize="15sp" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="›"
+                                android:textColor="#98A2B3"
+                                android:textSize="26sp" />
+                        </LinearLayout>
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:background="#F0F0F0" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="56dp"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal"
+                            android:paddingHorizontal="16dp">
+
+                            <ImageView
+                                android:layout_width="22dp"
+                                android:layout_height="22dp"
+                                android:src="@drawable/ic_bell"
+                                app:tint="#344054" />
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="   Thông báo"
+                                android:textColor="#1A1A1A"
+                                android:textSize="15sp" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="›"
+                                android:textColor="#98A2B3"
+                                android:textSize="26sp" />
+                        </LinearLayout>
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:background="#F0F0F0" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="56dp"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal"
+                            android:paddingHorizontal="16dp">
+
+                            <ImageView
+                                android:layout_width="22dp"
+                                android:layout_height="22dp"
+                                android:src="@drawable/ic_point"
+                                app:tint="#344054" />
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="    Hỗ trợ"
+                                android:textColor="#1A1A1A"
+                                android:textSize="15sp" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="›"
+                                android:textColor="#98A2B3"
+                                android:textSize="26sp" />
+                        </LinearLayout>
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
 
-                <!-- Logout Button -->
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/btnLogout"
                     android:layout_width="match_parent"
                     android:layout_height="56dp"
+                    android:layout_marginBottom="24dp"
                     android:text="Đăng xuất"
-                    android:textSize="16sp"
                     android:textAllCaps="false"
-                    app:cornerRadius="12dp"
+                    android:textColor="#1A1A1A"
+                    android:textSize="16sp"
                     app:backgroundTint="@android:color/white"
-                    app:strokeColor="#E5E5E5"
-                    app:strokeWidth="1dp"
-                    android:textColor="@android:color/black"
-                    android:layout_marginBottom="24dp" />
-
+                    app:cornerRadius="14dp"
+                    app:strokeColor="#F2F2F2"
+                    app:strokeWidth="1dp" />
             </LinearLayout>
-
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
-
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

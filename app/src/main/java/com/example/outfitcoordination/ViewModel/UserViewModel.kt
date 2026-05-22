@@ -18,7 +18,8 @@ class UserViewModel: ViewModel(){
         val user = User(          //tao user de truyen qua repository
             name = name,
             email = email,
-            state = 1
+            state = 1,
+            role = "user"
         )
 
         viewModelScope.launch {

@@ -9,96 +9,103 @@
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:paddingBottom="80dp">
+        android:fillViewport="true"
+        android:paddingBottom="88dp">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="24dp">
+            android:paddingStart="22dp"
+            android:paddingTop="28dp"
+            android:paddingEnd="22dp"
+            android:paddingBottom="24dp">
 
-            <!-- Header -->
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
+                android:layout_height="56dp"
                 android:gravity="center_vertical"
-                android:layout_marginBottom="24dp">
+                android:orientation="horizontal">
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="Thời trang mới nhất"
+                    android:textColor="#111111"
                     android:textSize="24sp"
-                    android:textColor="@android:color/black" />
+                    android:textStyle="bold" />
 
                 <ImageButton
                     android:id="@+id/btnFilter"
                     android:layout_width="48dp"
                     android:layout_height="48dp"
-                    android:background="@drawable/bg_round_white"
+                    android:background="@drawable/bg_circle_white_blur"
+                    android:contentDescription="Bộ lọc"
+                    android:elevation="3dp"
+                    android:padding="13dp"
                     android:src="@drawable/ic_filter"
-                    android:padding="12dp" />
+                    app:tint="#111111" />
             </LinearLayout>
 
-            <!-- Filter Chips -->
             <HorizontalScrollView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:scrollbars="none"
-                android:layout_marginBottom="24dp">
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="22dp"
+                android:clipToPadding="false"
+                android:scrollbars="none">
 
                 <com.google.android.material.chip.ChipGroup
                     android:id="@+id/chipGroup"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:singleSelection="true"
-                    app:checkedChip="@id/chipAll">
+                    app:checkedChip="@id/chipAll"
+                    app:chipSpacingHorizontal="10dp"
+                    app:singleSelection="true">
 
                     <com.google.android.material.chip.Chip
                         android:id="@+id/chipAll"
                         style="@style/Widget.MaterialComponents.Chip.Choice"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_height="42dp"
+                        android:checked="true"
                         android:text="Tất cả"
                         android:textColor="@color/chip_text_color"
+                        android:textStyle="bold"
                         app:chipBackgroundColor="@color/chip_bg_color"
-                        app:chipCornerRadius="20dp" />
+                        app:chipCornerRadius="22dp"
+                        app:chipMinHeight="42dp"
+                        app:chipStrokeWidth="0dp" />
 
                     <com.google.android.material.chip.Chip
                         android:id="@+id/chipOutfit"
                         style="@style/Widget.MaterialComponents.Chip.Choice"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_height="42dp"
                         android:text="Outfit"
                         android:textColor="@color/chip_text_color"
+                        android:textStyle="bold"
                         app:chipBackgroundColor="@color/chip_bg_color"
-                        app:chipCornerRadius="20dp" />
+                        app:chipCornerRadius="22dp"
+                        app:chipMinHeight="42dp"
+                        app:chipStrokeWidth="0dp" />
 
                     <com.google.android.material.chip.Chip
                         android:id="@+id/chipClothing"
                         style="@style/Widget.MaterialComponents.Chip.Choice"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_height="42dp"
                         android:text="Quần áo &amp; Giày"
                         android:textColor="@color/chip_text_color"
+                        android:textStyle="bold"
                         app:chipBackgroundColor="@color/chip_bg_color"
-                        app:chipCornerRadius="20dp" />
+                        app:chipCornerRadius="22dp"
+                        app:chipMinHeight="42dp"
+                        app:chipStrokeWidth="0dp" />
                 </com.google.android.material.chip.ChipGroup>
             </HorizontalScrollView>
 
-            <!-- Fashion Items Grid -->
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rvFashionItems"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-                app:spanCount="2" />
-
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
-
-    <!-- Bottom Navigation -->
-
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
