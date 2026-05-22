@@ -10,6 +10,7 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.viewModels
+import com.example.outfitcoordination.MainActivity
 import com.example.outfitcoordination.R
 import com.example.outfitcoordination.ViewModel.UserViewModel
 import com.example.outfitcoordination.databinding.FragmentLoginBinding
@@ -34,14 +35,12 @@ class Login : Fragment() {
 
         bottomSheetBehavior = BottomSheetBehavior.from(binding.bottomSheet)
 
-        // 3. Khi click vào ô nhập email -> Trượt form lên
         binding.logemail.setOnFocusChangeListener { _, hasFocus ->
             if (hasFocus) {
                 bottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
             }
         }
 
-        // 4. Khi bấm nút X -> Trượt form xuống & ẩn bàn phím
         binding.btnClose.setOnClickListener {
             bottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
 
@@ -51,7 +50,6 @@ class Login : Fragment() {
             imm.hideSoftInputFromWindow(view.windowToken, 0)
         }
 
-        // 5. Lắng nghe trạng thái trượt để làm mờ nút X và dòng Đăng ký
         bottomSheetBehavior.addBottomSheetCallback(object : BottomSheetBehavior.BottomSheetCallback() {
             override fun onStateChanged(bottomSheet: View, newState: Int) {
                 if (newState == BottomSheetBehavior.STATE_EXPANDED) {
@@ -79,8 +77,7 @@ class Login : Fragment() {
         viewmodel.SuccessLogin.observe(viewLifecycleOwner){success ->
             if(success){
                 Toast.makeText(requireContext(),"dang nhap thanh cong", Toast.LENGTH_SHORT).show()
-                parentFragmentManager.beginTransaction()
-                    .replace(R.id.fragmentContainer, Dashboard()).commit()
+                (requireActivity() as MainActivity).loadFragment(Dashboard())
             }else{
                 Toast.makeText(requireContext(),"dang nhap that bai", Toast.LENGTH_SHORT).show()
             }
@@ -88,7 +85,7 @@ class Login : Fragment() {
 
         binding.logregis.setOnClickListener {
             parentFragmentManager.beginTransaction()
-                .replace(R.id.main, Register()).commit()
+                .replace(R.id.fragmentContainer, Register()).commit()
         }
     }
 }
