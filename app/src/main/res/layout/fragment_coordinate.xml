@@ -60,17 +60,16 @@
                         android:textStyle="bold" />
 
                     <com.google.android.material.textfield.TextInputLayout
+                        style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.ExposedDropdownMenu"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="16dp"
                         android:hint="Tone da"
                         app:boxBackgroundColor="#F8F5F1"
-                        app:boxBackgroundMode="filled"
                         app:boxCornerRadiusBottomEnd="14dp"
                         app:boxCornerRadiusBottomStart="14dp"
                         app:boxCornerRadiusTopEnd="14dp"
-                        app:boxCornerRadiusTopStart="14dp"
-                        app:endIconMode="dropdown_menu">
+                        app:boxCornerRadiusTopStart="14dp">
 
                         <AutoCompleteTextView
                             android:id="@+id/dropdownSkin"
@@ -78,21 +77,20 @@
                             android:layout_height="wrap_content"
                             android:inputType="none"
                             android:textColor="#1A1A1A"
-                            tools:text="da sáng" />
+                            tools:text="trang" />
                     </com.google.android.material.textfield.TextInputLayout>
 
                     <com.google.android.material.textfield.TextInputLayout
+                        style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.ExposedDropdownMenu"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="12dp"
                         android:hint="Mùa"
                         app:boxBackgroundColor="#F8F5F1"
-                        app:boxBackgroundMode="filled"
                         app:boxCornerRadiusBottomEnd="14dp"
                         app:boxCornerRadiusBottomStart="14dp"
                         app:boxCornerRadiusTopEnd="14dp"
-                        app:boxCornerRadiusTopStart="14dp"
-                        app:endIconMode="dropdown_menu">
+                        app:boxCornerRadiusTopStart="14dp">
 
                         <AutoCompleteTextView
                             android:id="@+id/dropdownSeason"
@@ -100,21 +98,20 @@
                             android:layout_height="wrap_content"
                             android:inputType="none"
                             android:textColor="#1A1A1A"
-                            tools:text="mùa hè" />
+                            tools:text="nong" />
                     </com.google.android.material.textfield.TextInputLayout>
 
                     <com.google.android.material.textfield.TextInputLayout
+                        style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.ExposedDropdownMenu"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="12dp"
                         android:hint="Giới tính"
                         app:boxBackgroundColor="#F8F5F1"
-                        app:boxBackgroundMode="filled"
                         app:boxCornerRadiusBottomEnd="14dp"
                         app:boxCornerRadiusBottomStart="14dp"
                         app:boxCornerRadiusTopEnd="14dp"
-                        app:boxCornerRadiusTopStart="14dp"
-                        app:endIconMode="dropdown_menu">
+                        app:boxCornerRadiusTopStart="14dp">
 
                         <AutoCompleteTextView
                             android:id="@+id/dropdownSex"
@@ -122,21 +119,20 @@
                             android:layout_height="wrap_content"
                             android:inputType="none"
                             android:textColor="#1A1A1A"
-                            tools:text="nam" />
+                            tools:text="nu" />
                     </com.google.android.material.textfield.TextInputLayout>
 
                     <com.google.android.material.textfield.TextInputLayout
+                        style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.ExposedDropdownMenu"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="12dp"
                         android:hint="Hoàn cảnh"
                         app:boxBackgroundColor="#F8F5F1"
-                        app:boxBackgroundMode="filled"
                         app:boxCornerRadiusBottomEnd="14dp"
                         app:boxCornerRadiusBottomStart="14dp"
                         app:boxCornerRadiusTopEnd="14dp"
-                        app:boxCornerRadiusTopStart="14dp"
-                        app:endIconMode="dropdown_menu">
+                        app:boxCornerRadiusTopStart="14dp">
 
                         <AutoCompleteTextView
                             android:id="@+id/dropdownSituation"
@@ -144,21 +140,20 @@
                             android:layout_height="wrap_content"
                             android:inputType="none"
                             android:textColor="#1A1A1A"
-                            tools:text="đi học" />
+                            tools:text="di_choi" />
                     </com.google.android.material.textfield.TextInputLayout>
 
                     <com.google.android.material.textfield.TextInputLayout
+                        style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.ExposedDropdownMenu"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="12dp"
                         android:hint="Phong cách"
                         app:boxBackgroundColor="#F8F5F1"
-                        app:boxBackgroundMode="filled"
                         app:boxCornerRadiusBottomEnd="14dp"
                         app:boxCornerRadiusBottomStart="14dp"
                         app:boxCornerRadiusTopEnd="14dp"
-                        app:boxCornerRadiusTopStart="14dp"
-                        app:endIconMode="dropdown_menu">
+                        app:boxCornerRadiusTopStart="14dp">
 
                         <AutoCompleteTextView
                             android:id="@+id/dropdownStyle"
@@ -166,7 +161,7 @@
                             android:layout_height="wrap_content"
                             android:inputType="none"
                             android:textColor="#1A1A1A"
-                            tools:text="basic" />
+                            tools:text="toi_gian" />
                     </com.google.android.material.textfield.TextInputLayout>
 
                     <com.google.android.material.button.MaterialButton
@@ -216,108 +211,95 @@
                     android:layout_marginTop="4dp"
                     android:textColor="#8C8176"
                     android:textSize="13sp"
-                    tools:text="Áo thun trắng + áo khoác nâu + quần đen" />
+                    tools:text="Áo trong + Áo khoác + Quần" />
+
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="match_parent"
+                    android:layout_height="360dp"
+                    android:layout_marginTop="16dp"
+                    app:cardBackgroundColor="#FFFFFF"
+                    app:cardCornerRadius="26dp"
+                    app:cardElevation="0dp"
+                    app:strokeColor="#EEE7DF"
+                    app:strokeWidth="1dp">
+
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:padding="18dp">
+
+                        <ImageView
+                            android:id="@+id/imgAoTrong"
+                            android:layout_width="145dp"
+                            android:layout_height="170dp"
+                            android:layout_gravity="top|start"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="34dp"
+                            android:adjustViewBounds="true"
+                            android:background="#00FFFFFF"
+                            android:scaleType="fitCenter"
+                            android:src="@drawable/fashion_banner"
+                            tools:src="@drawable/fashion_banner" />
+
+                        <ImageView
+                            android:id="@+id/imgAoKhoac"
+                            android:layout_width="145dp"
+                            android:layout_height="170dp"
+                            android:layout_gravity="top|end"
+                            android:layout_marginTop="28dp"
+                            android:layout_marginEnd="8dp"
+                            android:adjustViewBounds="true"
+                            android:scaleType="fitCenter"
+                            android:src="@drawable/fashion_banner"
+                            tools:src="@drawable/fashion_banner" />
+
+                        <ImageView
+                            android:id="@+id/imgQuan"
+                            android:layout_width="165dp"
+                            android:layout_height="210dp"
+                            android:layout_gravity="bottom|center_horizontal"
+                            android:layout_marginBottom="10dp"
+                            android:adjustViewBounds="true"
+                            android:scaleType="fitCenter"
+                            android:src="@drawable/fashion_banner"
+                            tools:src="@drawable/fashion_banner" />
+                    </FrameLayout>
+                </com.google.android.material.card.MaterialCardView>
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:orientation="vertical">
+                    android:layout_marginTop="14dp"
+                    android:orientation="horizontal">
 
-                    <com.google.android.material.card.MaterialCardView
-                        android:layout_width="match_parent"
-                        android:layout_height="190dp"
-                        app:cardCornerRadius="22dp"
-                        app:cardElevation="0dp">
+                    <TextView
+                        android:id="@+id/tvAoTrongInfo"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:textColor="#1A1A1A"
+                        android:textSize="12sp"
+                        tools:text="Áo trong\nđen" />
 
-                        <FrameLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent">
+                    <TextView
+                        android:id="@+id/tvAoKhoacInfo"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:textColor="#1A1A1A"
+                        android:textSize="12sp"
+                        tools:text="Áo khoác\nđen" />
 
-                            <ImageView
-                                android:id="@+id/imgAoTrong"
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:scaleType="centerCrop"
-                                android:src="@drawable/fashion_banner" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="bottom|start"
-                                android:layout_margin="12dp"
-                                android:background="#CCFFFFFF"
-                                android:paddingHorizontal="12dp"
-                                android:paddingVertical="6dp"
-                                android:text="Áo trong"
-                                android:textColor="#1A1A1A"
-                                android:textStyle="bold" />
-                        </FrameLayout>
-                    </com.google.android.material.card.MaterialCardView>
-
-                    <com.google.android.material.card.MaterialCardView
-                        android:layout_width="match_parent"
-                        android:layout_height="190dp"
-                        android:layout_marginTop="14dp"
-                        app:cardCornerRadius="22dp"
-                        app:cardElevation="0dp">
-
-                        <FrameLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent">
-
-                            <ImageView
-                                android:id="@+id/imgAoKhoac"
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:scaleType="centerCrop"
-                                android:src="@drawable/fashion_banner" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="bottom|start"
-                                android:layout_margin="12dp"
-                                android:background="#CCFFFFFF"
-                                android:paddingHorizontal="12dp"
-                                android:paddingVertical="6dp"
-                                android:text="Áo khoác"
-                                android:textColor="#1A1A1A"
-                                android:textStyle="bold" />
-                        </FrameLayout>
-                    </com.google.android.material.card.MaterialCardView>
-
-                    <com.google.android.material.card.MaterialCardView
-                        android:layout_width="match_parent"
-                        android:layout_height="190dp"
-                        android:layout_marginTop="14dp"
-                        app:cardCornerRadius="22dp"
-                        app:cardElevation="0dp">
-
-                        <FrameLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent">
-
-                            <ImageView
-                                android:id="@+id/imgQuan"
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:scaleType="centerCrop"
-                                android:src="@drawable/fashion_banner" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="bottom|start"
-                                android:layout_margin="12dp"
-                                android:background="#CCFFFFFF"
-                                android:paddingHorizontal="12dp"
-                                android:paddingVertical="6dp"
-                                android:text="Quần"
-                                android:textColor="#1A1A1A"
-                                android:textStyle="bold" />
-                        </FrameLayout>
-                    </com.google.android.material.card.MaterialCardView>
+                    <TextView
+                        android:id="@+id/tvQuanInfo"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="end"
+                        android:textColor="#1A1A1A"
+                        android:textSize="12sp"
+                        tools:text="Quần\nxanh" />
                 </LinearLayout>
 
                 <LinearLayout
