@@ -2,6 +2,7 @@
 <androidx.coordinatorlayout.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#F5F1ED">
@@ -105,6 +106,27 @@
                         app:chipStrokeWidth="0dp" />
                 </com.google.android.material.chip.ChipGroup>
             </HorizontalScrollView>
+
+            <TextView
+                android:id="@+id/tvEmpty"
+                android:layout_width="match_parent"
+                android:layout_height="120dp"
+                android:gravity="center"
+                android:text="Chưa có outfit nào được tạo"
+                android:textColor="#8C8176"
+                android:textSize="15sp"
+                android:visibility="gone"
+                tools:visibility="visible" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvGeneratedOutfits"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:clipToPadding="false"
+                android:nestedScrollingEnabled="false"
+                app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                app:spanCount="2"
+                tools:itemCount="4" />
 
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
