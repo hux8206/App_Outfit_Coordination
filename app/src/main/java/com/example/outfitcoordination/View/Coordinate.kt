@@ -212,14 +212,14 @@ class Coordinate : Fragment() {
         quan: Clothes?
     ): String {
         return if (sex == "nam") {
-            aoTrong?.linkMale?.takeIf { it.isNotBlank() }
-                ?: aoKhoac?.linkMale?.takeIf { it.isNotBlank() }
-                ?: quan?.linkMale?.takeIf { it.isNotBlank() }
+            aoTrong?.male?.takeIf { it.isNotBlank() }
+                ?: aoKhoac?.male?.takeIf { it.isNotBlank() }
+                ?: quan?.male?.takeIf { it.isNotBlank() }
                 ?: ""
         } else {
-            aoTrong?.linkFemale?.takeIf { it.isNotBlank() }
-                ?: aoKhoac?.linkFemale?.takeIf { it.isNotBlank() }
-                ?: quan?.linkFemale?.takeIf { it.isNotBlank() }
+            aoTrong?.female?.takeIf { it.isNotBlank() }
+                ?: aoKhoac?.female?.takeIf { it.isNotBlank() }
+                ?: quan?.female?.takeIf { it.isNotBlank() }
                 ?: ""
         }
     }
