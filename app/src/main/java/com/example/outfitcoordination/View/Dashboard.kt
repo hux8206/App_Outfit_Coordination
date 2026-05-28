@@ -49,6 +49,19 @@ class Dashboard : Fragment() {
 
         obserData()
         viewmodel.loadClothes()
+
+        binding.cardAll.setOnClickListener {
+            viewmodel.filterClothes("all")
+        }
+        binding.cardAotrong.setOnClickListener {
+            viewmodel.filterClothes("ao_trong")
+        }
+        binding.cardAokhoac.setOnClickListener {
+            viewmodel.filterClothes("ao_khoac")
+        }
+        binding.cardQuan.setOnClickListener {
+            viewmodel.filterClothes("quan")
+        }
     }
 
     private fun obserData(){
