@@ -3,15 +3,22 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="170dp"
     android:layout_height="220dp"
-    android:layout_marginEnd="12dp"
+    android:layout_margin="8dp"
     app:cardCornerRadius="18dp"
-    app:cardElevation="0dp">
+    android:translationX="5dp"
+    app:cardElevation="4dp">
 
-    <ImageView
-        android:id="@+id/imgOutfit"
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:scaleType="centerCrop"
-        android:src="@drawable/fashion_banner" />
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/imgOutfit"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:adjustViewBounds="true"
+            android:scaleType="centerCrop"
+            android:src="@drawable/fashion_banner" />
+    </FrameLayout>
 
 </com.google.android.material.card.MaterialCardView>
