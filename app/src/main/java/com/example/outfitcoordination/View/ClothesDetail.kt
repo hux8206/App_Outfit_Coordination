@@ -36,11 +36,15 @@ class ClothesDetail : Fragment() {
         drawable.setColor(DisplayFormatter.getColor(color))
 
         Glide.with(requireContext()).load(image).into(binding.imgDetail)
+
         binding.btnBuyFemale.setOnClickListener {
             (requireActivity() as MainActivity).openLink(linkfemale)
         }
         binding.btnBuyMale.setOnClickListener {
             (requireActivity() as MainActivity).openLink(linkmale)
+        }
+        binding.btnBack.setOnClickListener {
+            parentFragmentManager.popBackStack()
         }
     }
 }
