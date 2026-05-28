@@ -25,6 +25,19 @@
                 android:background="#FFFFFF"
                 android:src="@drawable/fashion_banner" />
 
+            <ImageButton
+                android:id="@+id/btnBack"
+                android:layout_width="44dp"
+                android:layout_height="44dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/bg_circle"
+                android:padding="10dp"
+                android:src="@drawable/ic_back"
+                app:tint="#1A1A1A"
+                android:elevation="6dp"
+                android:layout_gravity="top|start"/>
+
         </com.google.android.material.card.MaterialCardView>
 
         <!-- thông tin -->

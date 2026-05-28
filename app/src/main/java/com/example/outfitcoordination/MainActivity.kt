@@ -80,6 +80,7 @@ class MainActivity : AppCompatActivity() {
     fun loadFragment(fragment: Fragment) {
         supportFragmentManager.beginTransaction()
             .replace(R.id.fragmentContainer, fragment)
+            .addToBackStack(null)
             .commit()
         val hideNav = fragment is Login || fragment is Register
         binding.bottomAppBar.visibility = if (hideNav) View.GONE else View.VISIBLE
