@@ -1,10 +1,13 @@
 package com.example.outfitcoordination.View
 
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.outfitcoordination.Adapter.ClothesAdapter
@@ -14,7 +17,7 @@ import com.example.outfitcoordination.ViewModel.ClothesViewModel
 import com.example.outfitcoordination.databinding.FragmentDashboardBinding
 
 class Dashboard : Fragment() {
-    private val viewmodel : ClothesViewModel by viewModels()
+    private val viewmodel : ClothesViewModel by activityViewModels()
     private var _binding: FragmentDashboardBinding? = null
     private val binding get() = _binding!!
     private val clothesList = mutableListOf<Clothes>()
@@ -48,7 +51,9 @@ class Dashboard : Fragment() {
         binding.rvOutfits.isNestedScrollingEnabled = false
 
         obserData()
-        viewmodel.loadClothes()
+        if (viewmodel.clothes.value == null){
+            viewmodel.loadClothes()
+        }
 
         binding.cardAll.setOnClickListener {
             viewmodel.filterClothes("all")
@@ -62,6 +67,16 @@ class Dashboard : Fragment() {
         binding.cardQuan.setOnClickListener {
             viewmodel.filterClothes("quan")
         }
+
+        binding.edtSearch.addTextChangedListener(object : TextWatcher{
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
+
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                viewmodel.search(p0.toString())
+            }
+
+            override fun afterTextChanged(p0: Editable?) {}
+        })
     }
 
     private fun obserData(){
