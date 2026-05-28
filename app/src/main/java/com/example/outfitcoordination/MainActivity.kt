@@ -1,6 +1,9 @@
 package com.example.outfitcoordination // Đang khớp với vị trí hiện tại của bạn
+import android.content.Intent
+import android.net.Uri
 import android.view.View
 import android.os.Bundle
+import android.provider.Telephony
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
@@ -87,5 +90,14 @@ class MainActivity : AppCompatActivity() {
         val user = FirebaseAuth.getInstance().currentUser
         Toast.makeText(this, user?.email ?: "Chưa đăng nhập", Toast.LENGTH_SHORT).show()
         return user != null
+    }
+
+    fun openLink(link : String ){
+        if (link.isNotBlank()){
+            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(link))
+            startActivity(intent)
+        }else{
+            Toast.makeText(this,"link not exist!", Toast.LENGTH_SHORT).show()
+        }
     }
 }

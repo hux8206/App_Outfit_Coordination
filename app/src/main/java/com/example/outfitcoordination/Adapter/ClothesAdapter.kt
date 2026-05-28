@@ -7,7 +7,10 @@ import com.bumptech.glide.Glide
 import com.example.outfitcoordination.Model.Clothes
 import com.example.outfitcoordination.databinding.ItemOutfitDashboardBinding
 
-class ClothesAdapter(private val list: List<Clothes>) : RecyclerView.Adapter<ClothesAdapter.ClothesViewHolder>() {
+class ClothesAdapter(
+    private val list: List<Clothes>,
+    private val onItemClick : (Clothes)->Unit
+) : RecyclerView.Adapter<ClothesAdapter.ClothesViewHolder>() {
     inner class ClothesViewHolder(val binding: ItemOutfitDashboardBinding) : RecyclerView.ViewHolder(binding.root)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ClothesViewHolder { //tao khung de do giao dien
@@ -25,6 +28,10 @@ class ClothesAdapter(private val list: List<Clothes>) : RecyclerView.Adapter<Clo
         Glide.with(holder.itemView.context)
             .load(item.image)
             .into(holder.binding.imgOutfit)
+
+        holder.itemView.setOnClickListener {
+            onItemClick(item)
+        }
     }
 
     override fun getItemCount(): Int = list.size // tra ve so luong item co trong list
