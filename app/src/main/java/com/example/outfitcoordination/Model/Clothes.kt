@@ -4,12 +4,12 @@ import android.media.Image
 
 data class Clothes(
     val color : String = "",
-    val favorite : Boolean = false,
+    val favourite : Boolean = false,
     val public : Boolean = false,
     val image: String = "",
-    val linkFemale : String = "",
-    val linkMale : String = "",
-    val publicID : String ="",
+    val female : String = "",
+    val male : String = "",
+    val id : String ="",
     val type : String = "",
     val name : String = ""
 )
