@@ -32,7 +32,7 @@ class ClothesDetail : Fragment() {
         val linkfemale = arguments?.getString("female") ?: ""
 
         binding.txtname.text = DisplayFormatter.clothesName(name)
-        val drawable = binding.viewColor.background as GradientDrawable
+        val drawable = binding.viewColor.background.mutate() as GradientDrawable
         drawable.setColor(DisplayFormatter.getColor(color))
 
         Glide.with(requireContext()).load(image).into(binding.imgDetail)

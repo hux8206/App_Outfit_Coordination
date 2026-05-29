@@ -3,8 +3,10 @@ package com.example.outfitcoordination.ViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.example.outfitcoordination.Model.Clothes
 import com.example.outfitcoordination.Reponsitory.ClothesRepository
+import kotlinx.coroutines.launch
 
 class ClothesViewModel : ViewModel() {
     private val repository = ClothesRepository()
@@ -75,5 +77,16 @@ class ClothesViewModel : ViewModel() {
                 else -> char
             }
         }.joinToString("")
+    }
+
+    fun toggleFavor(clothes: Clothes, onComplete : (Boolean) -> Unit){
+        clothes.favourite = !clothes.favourite
+        viewModelScope.launch {
+            repository.updateFavor(
+                clothes.id,
+                clothes.favourite,
+                onComplete
+            )
+        }
     }
 }
