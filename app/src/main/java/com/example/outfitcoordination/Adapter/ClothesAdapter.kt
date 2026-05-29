@@ -5,11 +5,13 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.outfitcoordination.Model.Clothes
+import com.example.outfitcoordination.R
 import com.example.outfitcoordination.databinding.ItemOutfitDashboardBinding
 
 class ClothesAdapter(
     private val list: List<Clothes>,
-    private val onItemClick : (Clothes)->Unit
+    private val onItemClick : (Clothes)->Unit,
+    private val onCLickFavor : (Clothes) -> Unit
 ) : RecyclerView.Adapter<ClothesAdapter.ClothesViewHolder>() {
     inner class ClothesViewHolder(val binding: ItemOutfitDashboardBinding) : RecyclerView.ViewHolder(binding.root)
 
@@ -31,6 +33,20 @@ class ClothesAdapter(
 
         holder.itemView.setOnClickListener {
             onItemClick(item)
+        }
+
+        if(item.favourite){
+            holder.binding.btnFavorite.setImageResource(
+                R.drawable.ic_heart_fill
+            )
+        }else{
+            holder.binding.btnFavorite.setImageResource(
+                R.drawable.ic_heart
+            )
+        }
+
+        holder.binding.btnFavorite.setOnClickListener {
+            onCLickFavor(item)
         }
     }
 
