@@ -45,6 +45,8 @@ class Dashboard : Fragment() {
                 bundle.putString("male",clothes.male)
                 bundle.putString("name",clothes.name)
                 bundle.putString("color",clothes.color)
+                bundle.putBoolean("favourite",clothes.favourite)
+                bundle.putString("id",clothes.id)
 
                 detail.arguments = bundle
                 (requireActivity() as MainActivity).loadFragment(detail)

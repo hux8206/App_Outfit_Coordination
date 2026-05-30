@@ -25,6 +25,17 @@
                 android:background="#FFFFFF"
                 android:src="@drawable/fashion_banner" />
 
+            <ImageView
+                android:id="@+id/btnfavordetail"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:layout_gravity="top|end"
+                android:layout_margin="10dp"
+                android:padding="6dp"
+                android:background="@drawable/bg_circle"
+                android:src="@drawable/ic_heart"
+                />
+
             <ImageButton
                 android:id="@+id/btnBack"
                 android:layout_width="44dp"

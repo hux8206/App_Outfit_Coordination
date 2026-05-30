@@ -80,13 +80,16 @@ class ClothesViewModel : ViewModel() {
     }
 
     fun toggleFavor(clothes: Clothes, onComplete : (Boolean) -> Unit){
-        clothes.favourite = !clothes.favourite
+        val nextFavorStatus = !clothes.favourite
         viewModelScope.launch {
-            repository.updateFavor(
-                clothes.id,
-                clothes.favourite,
-                onComplete
-            )
+            repository.updateFavor(clothes.id,nextFavorStatus){issuccess ->
+                if (issuccess) {
+                    clothes.favourite = nextFavorStatus
+                    allClothesList.find { it.id == clothes.id }?.favourite = nextFavorStatus
+                    filterClothes(currentlist)
+                }
+                onComplete(issuccess)
+            }
         }
     }
 }
