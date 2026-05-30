@@ -11,8 +11,10 @@ import kotlinx.coroutines.launch
 class ClothesViewModel : ViewModel() {
     private val repository = ClothesRepository()
     private val _clothes = MutableLiveData<List<Clothes>>()
+    private val _wrClothes = MutableLiveData<List<Clothes>>()
     private val allClothesList = mutableListOf<Clothes>()
     val clothes : LiveData<List<Clothes>>get() = _clothes
+    val wrClothes : LiveData<List<Clothes>>get() = _wrClothes
     private var currentlist = "all"
     fun loadClothes(){
         repository.getClothes { list ->
@@ -20,6 +22,15 @@ class ClothesViewModel : ViewModel() {
             allClothesList.addAll(list)
 
             filterClothes(currentlist)
+        }
+    }
+
+    fun loadFavorClothes(){
+        repository.getClothes { list ->
+            allClothesList.clear()
+            allClothesList.addAll(list)
+
+            _wrClothes.value = list.filter { it.favourite }
         }
     }
 

@@ -19,7 +19,7 @@ import com.example.outfitcoordination.databinding.FragmentDashboardBinding
 import kotlinx.coroutines.flow.merge
 
 class Dashboard : Fragment() {
-    private val viewmodel : ClothesViewModel by activityViewModels()
+    private val viewmodel : ClothesViewModel by viewModels()
     private var _binding: FragmentDashboardBinding? = null
     private val binding get() = _binding!!
     private val clothesList = mutableListOf<Clothes>()
@@ -109,3 +109,5 @@ class Dashboard : Fragment() {
         _binding = null
     }
 }
+
+// repository->viewmodel0->fragment->adapter->show UI
