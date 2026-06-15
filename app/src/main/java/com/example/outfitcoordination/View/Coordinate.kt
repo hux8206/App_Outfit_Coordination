@@ -83,13 +83,20 @@ class Coordinate : Fragment() {
                 bundle.putDouble("compatibility",outfit.compatibility)
                 bundle.putBoolean("favorite",outfit.favorite)
                 bundle.putString("outfitID",outfit.outfitID)
+                bundle.putBoolean("public",outfit.public)
 
                 detail.arguments = bundle
                 (requireActivity() as MainActivity).loadFragment(detail)
+            },
+
+            onClickFavor = {outfit ->
+                viewmodel.toggleFavor(outfit)
+            },
+
+            onClickPublic = {outfit, isChecked ->
+                viewmodel.togglePublicOutfit(outfit,isChecked)
             }
-        ){outfit ->
-            viewmodel.toggleFavor(outfit)
-        }
+        )
 
         binding.rcvOutfits.layoutManager = GridLayoutManager(requireContext(),1)
         binding.rcvOutfits.setHasFixedSize(false)
