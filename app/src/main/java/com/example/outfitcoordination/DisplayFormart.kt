@@ -12,7 +12,7 @@ object DisplayFormatter {
             "tank_top" -> "Áo tank top"
             "crop_top" -> "Áo croptop"
 
-            "ao_khoac" -> "Áo khoác"
+            "jacket" -> "Áo khoác"
             "ao_chong_nang" -> "Áo chống nắng"
             "hoodie" -> "Hoodie"
             "blazer" -> "Blazer"
@@ -26,6 +26,19 @@ object DisplayFormatter {
             "quan_ong_suong" -> "Quần ống suông"
             "short" -> "Quần short"
             "chan_vay" -> "Chân váy"
+
+            "trang" -> "trắng"
+            "den" -> "đen"
+            "xam" -> "xám"
+            "xanh" -> "xanh"
+            "nau" -> "nâu"
+            "xanhla" -> "xanh lá"
+            "kem" -> "kem"
+            "vang" -> "vàng"
+            "hong" -> "hồng"
+            "do" -> "đỏ"
+            "cam" -> "cam"
+            "be" -> "be"
 
             else -> value
                 .replace("_", " ")
