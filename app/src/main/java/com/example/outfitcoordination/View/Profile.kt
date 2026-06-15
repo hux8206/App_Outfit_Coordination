@@ -10,6 +10,7 @@ import com.example.outfitcoordination.MainActivity
 import com.example.outfitcoordination.R
 import com.example.outfitcoordination.databinding.FragmentProfileBinding
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
 
 class Profile : Fragment() {
 
@@ -49,6 +50,30 @@ class Profile : Fragment() {
         binding.btnWardrobe.setOnClickListener {
             (requireActivity() as MainActivity).loadFragment(Wardrobe())
         }
+
+        val uid = auth.currentUser?.uid
+        FirebaseFirestore.getInstance()
+            .collection("outfits")
+            .whereEqualTo("userId", uid)
+            .get()
+            .addOnSuccessListener {
+                binding.numofoutfit.text = it.size().toString()
+            }
+        FirebaseFirestore.getInstance()
+            .collection("clothes")
+            .whereEqualTo("favourite",true)
+            .get()
+            .addOnSuccessListener {
+                binding.numofclothes.text = it.size().toString()
+            }
+        FirebaseFirestore.getInstance()
+            .collection("outfits")
+            .whereEqualTo("userId", uid)
+            .whereEqualTo("public",true)
+            .get()
+            .addOnSuccessListener {
+                binding.numofpost.text = it.size().toString()
+            }
     }
 
     override fun onDestroyView() {
