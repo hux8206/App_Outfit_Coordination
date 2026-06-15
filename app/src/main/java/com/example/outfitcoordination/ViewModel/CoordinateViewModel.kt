@@ -13,8 +13,10 @@ class CoordinateViewModel: ViewModel() {
     private val repository = CoordinateRepository()
     private val _outfits = MutableLiveData<List<OutfitUIModel>>()
     private val _favorOutfit = MutableLiveData<List<OutfitUIModel>>()
+    private val _publicOutfit = MutableLiveData<List<OutfitUIModel>>()
     val outfits : LiveData<List<OutfitUIModel>>get() = _outfits //truyen qua outfits de dua len UI
     val favorOutfit : LiveData<List<OutfitUIModel>>get() = _favorOutfit
+    val publicOutfit : LiveData<List<OutfitUIModel>>get() = _publicOutfit
     private val _loading = MutableLiveData<Boolean>()
     val loading : LiveData<Boolean>get() = _loading
 
@@ -98,6 +100,31 @@ class CoordinateViewModel: ViewModel() {
     fun getFavorOutfit(){
         viewModelScope.launch {
             _favorOutfit.value = repository.getFavorOutfit()
+        }
+    }
+
+    fun togglePublicOutfit(
+        outfit: OutfitUIModel,
+        isPublic: Boolean
+    ) {
+
+        viewModelScope.launch {
+            repository.updataSwitchOutfit(outfit.outfitID, isPublic)
+            val current = _outfits.value ?: return@launch
+            _outfits.value =
+                current.map {
+                    if(it.outfitID == outfit.outfitID){
+                        it.copy(public = isPublic)
+                    }else{
+                        it
+                    }
+                }
+        }
+    }
+
+    fun getOutfitPublic(){
+        viewModelScope.launch {
+            _publicOutfit.value = repository.getOutfitPublic()
         }
     }
 }

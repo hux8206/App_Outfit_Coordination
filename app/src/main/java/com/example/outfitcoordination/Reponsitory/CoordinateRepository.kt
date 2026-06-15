@@ -156,4 +156,26 @@ class CoordinateRepository {
             outfit?.copy(outfitID = doc.id)
         }
     }
+
+    suspend fun updataSwitchOutfit(
+        outfitID : String,
+        isPublic : Boolean
+    ){
+        if (outfitID.isBlank()) return
+        db.collection("outfits")
+            .document(outfitID)
+            .update("public",isPublic)
+            .await()
+    }
+
+    suspend fun getOutfitPublic() : List<OutfitUIModel>{
+        val snapshot = db.collection("outfits")
+            .whereEqualTo("public",true)
+            .get()
+            .await()
+        return snapshot.documents.mapNotNull {doc ->
+            val outfit = doc.toObject(OutfitUIModel::class.java)
+            outfit?.copy(outfitID = doc.id)
+        }
+    }
 }
