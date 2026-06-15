@@ -12,8 +12,9 @@ import kotlinx.coroutines.launch
 class CoordinateViewModel: ViewModel() {
     private val repository = CoordinateRepository()
     private val _outfits = MutableLiveData<List<OutfitUIModel>>()
+    private val _favorOutfit = MutableLiveData<List<OutfitUIModel>>()
     val outfits : LiveData<List<OutfitUIModel>>get() = _outfits //truyen qua outfits de dua len UI
-
+    val favorOutfit : LiveData<List<OutfitUIModel>>get() = _favorOutfit
     private val _loading = MutableLiveData<Boolean>()
     val loading : LiveData<Boolean>get() = _loading
 
@@ -50,6 +51,53 @@ class CoordinateViewModel: ViewModel() {
             } finally {
                 _loading.value = false
             }
+        }
+    }
+
+    fun toggleFavor(outfit : OutfitUIModel){
+        viewModelScope.launch {
+            try{
+                val currentList = _outfits.value ?: return@launch
+
+                if (!outfit.favorite){
+                    val outfitID = repository.saveOutfit(outfit)
+
+                    _outfits.value = currentList.map {
+                        if (it == outfit){
+                            it.copy(favorite = true, outfitID = outfitID)
+                        }else{
+                            it
+                        }
+                    }
+                }else{
+                    repository.deleteOutfit(outfit.outfitID)
+                    _outfits.value = currentList.map {
+                        if (it == outfit){
+                            it.copy(favorite = false, outfitID = "")
+                        }else{
+                            it
+                        }
+                    }
+                }
+            }catch(e : Exception){
+                _error.value = e.message
+            }
+        }
+    }
+
+    fun removeFavorOutfit(outfit : OutfitUIModel){
+        viewModelScope.launch {
+            repository.deleteOutfit(outfit.outfitID)
+            val currentList = _outfits.value ?: emptyList()
+            _outfits.value = currentList.filter {
+                it.outfitID != outfit.outfitID // giu lai cac outfit khac outfit vua bam huy tim
+            }
+        }
+    }
+
+    fun getFavorOutfit(){
+        viewModelScope.launch {
+            _favorOutfit.value = repository.getFavorOutfit()
         }
     }
 }
