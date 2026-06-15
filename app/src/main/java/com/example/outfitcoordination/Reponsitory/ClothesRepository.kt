@@ -6,7 +6,6 @@ import com.google.firebase.firestore.FirebaseFirestore
 
 class ClothesRepository {
     private val db = FirebaseFirestore.getInstance()
-
     fun getClothes(
         onResult : (List<Clothes>) -> Unit
     ){

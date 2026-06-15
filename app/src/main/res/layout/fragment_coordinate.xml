@@ -5,336 +5,271 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F5F1ED">
+    android:background="#F7F4F0">
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:fillViewport="true"
-        android:paddingBottom="90dp">
+        android:paddingBottom="100dp">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="24dp">
+            android:paddingHorizontal="20dp"
+            android:paddingTop="28dp">
 
+            <!-- HEADER -->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Phối đồ AI"
                 android:textColor="#1A1A1A"
-                android:textSize="28sp"
-                android:textStyle="bold" />
+                android:textSize="26sp"
+                android:textStyle="bold"
+                android:letterSpacing="0.02" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
-                android:text="Chọn thông tin, AI sẽ gợi ý outfit phù hợp cho bạn"
-                android:textColor="#8C8176"
-                android:textSize="14sp" />
+                android:text="Mô tả phong cách, AI sẽ gợi ý outfit phù hợp"
+                android:textColor="#9A8F85"
+                android:textSize="13sp" />
 
+            <!-- INPUT BOX -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                app:boxBackgroundColor="#FFFFFF"
+                app:boxCornerRadiusTopStart="18dp"
+                app:boxCornerRadiusTopEnd="18dp"
+                app:boxCornerRadiusBottomStart="18dp"
+                app:boxCornerRadiusBottomEnd="18dp"
+                app:boxStrokeColor="#E8E0D8"
+                app:hintEnabled="false"
+                app:hintTextColor="#9A8F85">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/edtPrompt"
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    android:gravity="top"
+                    android:hint="Nhập yêu cầu của bạn"
+                    android:inputType="textMultiLine"
+                    android:maxLines="4"
+                    android:paddingTop="14dp"
+                    android:textSize="14sp"
+                    android:textColor="#1A1A1A" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- DROPDOWN CARD -->
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
+                android:layout_marginTop="14dp"
                 app:cardBackgroundColor="#FFFFFF"
-                app:cardCornerRadius="24dp"
+                app:cardCornerRadius="20dp"
                 app:cardElevation="0dp"
-                app:strokeColor="#EEE7DF"
+                app:strokeColor="#EDE7DF"
                 app:strokeWidth="1dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:padding="18dp">
+                    android:padding="14dp">
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Thông tin đầu vào"
-                        android:textColor="#1A1A1A"
-                        android:textSize="18sp"
-                        android:textStyle="bold" />
-
-                    <com.google.android.material.textfield.TextInputLayout
-                        style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.ExposedDropdownMenu"
+                    <!-- Row 1: Tone da + Mùa -->
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="16dp"
-                        android:hint="Tone da"
-                        app:boxBackgroundColor="#F8F5F1"
-                        app:boxCornerRadiusBottomEnd="14dp"
-                        app:boxCornerRadiusBottomStart="14dp"
-                        app:boxCornerRadiusTopEnd="14dp"
-                        app:boxCornerRadiusTopStart="14dp">
+                        android:orientation="horizontal">
 
-                        <AutoCompleteTextView
-                            android:id="@+id/dropdownSkin"
-                            android:layout_width="match_parent"
+                        <com.google.android.material.textfield.TextInputLayout
+                            style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.ExposedDropdownMenu"
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:inputType="none"
-                            android:textColor="#1A1A1A"
-                            tools:text="trang" />
-                    </com.google.android.material.textfield.TextInputLayout>
+                            android:layout_weight="1"
+                            android:layout_marginEnd="6dp"
+                            android:hint="Tone da"
+                            app:boxCornerRadiusTopStart="12dp"
+                            app:boxCornerRadiusTopEnd="12dp"
+                            app:boxCornerRadiusBottomStart="12dp"
+                            app:boxCornerRadiusBottomEnd="12dp">
+                            <AutoCompleteTextView
+                                android:id="@+id/dropdownSkin"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:inputType="none" />
+                        </com.google.android.material.textfield.TextInputLayout>
 
-                    <com.google.android.material.textfield.TextInputLayout
-                        style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.ExposedDropdownMenu"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="12dp"
-                        android:hint="Mùa"
-                        app:boxBackgroundColor="#F8F5F1"
-                        app:boxCornerRadiusBottomEnd="14dp"
-                        app:boxCornerRadiusBottomStart="14dp"
-                        app:boxCornerRadiusTopEnd="14dp"
-                        app:boxCornerRadiusTopStart="14dp">
-
-                        <AutoCompleteTextView
-                            android:id="@+id/dropdownSeason"
-                            android:layout_width="match_parent"
+                        <com.google.android.material.textfield.TextInputLayout
+                            style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.ExposedDropdownMenu"
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:inputType="none"
-                            android:textColor="#1A1A1A"
-                            tools:text="nong" />
-                    </com.google.android.material.textfield.TextInputLayout>
+                            android:layout_weight="1"
+                            android:layout_marginStart="6dp"
+                            android:hint="Mùa"
+                            app:boxCornerRadiusTopStart="12dp"
+                            app:boxCornerRadiusTopEnd="12dp"
+                            app:boxCornerRadiusBottomStart="12dp"
+                            app:boxCornerRadiusBottomEnd="12dp">
+                            <AutoCompleteTextView
+                                android:id="@+id/dropdownSeason"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:inputType="none" />
+                        </com.google.android.material.textfield.TextInputLayout>
 
-                    <com.google.android.material.textfield.TextInputLayout
-                        style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.ExposedDropdownMenu"
+                    </LinearLayout>
+
+                    <!-- Row 2: Giới tính + Hoàn cảnh -->
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="12dp"
-                        android:hint="Giới tính"
-                        app:boxBackgroundColor="#F8F5F1"
-                        app:boxCornerRadiusBottomEnd="14dp"
-                        app:boxCornerRadiusBottomStart="14dp"
-                        app:boxCornerRadiusTopEnd="14dp"
-                        app:boxCornerRadiusTopStart="14dp">
+                        android:layout_marginTop="10dp"
+                        android:orientation="horizontal">
 
-                        <AutoCompleteTextView
-                            android:id="@+id/dropdownSex"
-                            android:layout_width="match_parent"
+                        <com.google.android.material.textfield.TextInputLayout
+                            style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.ExposedDropdownMenu"
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:inputType="none"
-                            android:textColor="#1A1A1A"
-                            tools:text="nu" />
-                    </com.google.android.material.textfield.TextInputLayout>
+                            android:layout_weight="1"
+                            android:layout_marginEnd="6dp"
+                            android:hint="Giới tính"
+                            app:boxCornerRadiusTopStart="12dp"
+                            app:boxCornerRadiusTopEnd="12dp"
+                            app:boxCornerRadiusBottomStart="12dp"
+                            app:boxCornerRadiusBottomEnd="12dp">
+                            <AutoCompleteTextView
+                                android:id="@+id/dropdownSex"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:inputType="none" />
+                        </com.google.android.material.textfield.TextInputLayout>
 
-                    <com.google.android.material.textfield.TextInputLayout
-                        style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.ExposedDropdownMenu"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="12dp"
-                        android:hint="Hoàn cảnh"
-                        app:boxBackgroundColor="#F8F5F1"
-                        app:boxCornerRadiusBottomEnd="14dp"
-                        app:boxCornerRadiusBottomStart="14dp"
-                        app:boxCornerRadiusTopEnd="14dp"
-                        app:boxCornerRadiusTopStart="14dp">
-
-                        <AutoCompleteTextView
-                            android:id="@+id/dropdownSituation"
-                            android:layout_width="match_parent"
+                        <com.google.android.material.textfield.TextInputLayout
+                            style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.ExposedDropdownMenu"
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:inputType="none"
-                            android:textColor="#1A1A1A"
-                            tools:text="di_choi" />
-                    </com.google.android.material.textfield.TextInputLayout>
+                            android:layout_weight="1"
+                            android:layout_marginStart="6dp"
+                            android:hint="Hoàn cảnh"
+                            app:boxCornerRadiusTopStart="12dp"
+                            app:boxCornerRadiusTopEnd="12dp"
+                            app:boxCornerRadiusBottomStart="12dp"
+                            app:boxCornerRadiusBottomEnd="12dp">
+                            <AutoCompleteTextView
+                                android:id="@+id/dropdownSituation"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:inputType="none" />
+                        </com.google.android.material.textfield.TextInputLayout>
 
+                    </LinearLayout>
+
+                    <!-- Row 3: Phong cách (full width) -->
                     <com.google.android.material.textfield.TextInputLayout
                         style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.ExposedDropdownMenu"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="12dp"
+                        android:layout_marginTop="10dp"
                         android:hint="Phong cách"
-                        app:boxBackgroundColor="#F8F5F1"
-                        app:boxCornerRadiusBottomEnd="14dp"
-                        app:boxCornerRadiusBottomStart="14dp"
-                        app:boxCornerRadiusTopEnd="14dp"
-                        app:boxCornerRadiusTopStart="14dp">
-
+                        app:boxCornerRadiusTopStart="12dp"
+                        app:boxCornerRadiusTopEnd="12dp"
+                        app:boxCornerRadiusBottomStart="12dp"
+                        app:boxCornerRadiusBottomEnd="12dp">
                         <AutoCompleteTextView
                             android:id="@+id/dropdownStyle"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:inputType="none"
-                            android:textColor="#1A1A1A"
-                            tools:text="toi_gian" />
+                            android:inputType="none" />
                     </com.google.android.material.textfield.TextInputLayout>
 
-                    <com.google.android.material.button.MaterialButton
-                        android:id="@+id/btnGenerate"
-                        android:layout_width="match_parent"
-                        android:layout_height="56dp"
-                        android:layout_marginTop="20dp"
-                        android:text="Tạo outfit"
-                        android:textAllCaps="false"
-                        android:textColor="#FFFFFF"
-                        android:textSize="16sp"
-                        android:textStyle="bold"
-                        app:backgroundTint="#8B7355"
-                        app:cornerRadius="16dp" />
-
-                    <ProgressBar
-                        android:id="@+id/progressLoading"
-                        android:layout_width="32dp"
-                        android:layout_height="32dp"
-                        android:layout_gravity="center_horizontal"
-                        android:layout_marginTop="16dp"
-                        android:visibility="gone" />
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
+            <!-- NÚT GỢI Ý -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnPredict"
+                android:layout_width="match_parent"
+                android:layout_height="52dp"
+                android:layout_marginTop="16dp"
+                android:text="✨  Gợi ý outfit"
+                android:textAllCaps="false"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                app:backgroundTint="#1A1A1A"
+                app:cornerRadius="16dp" />
+
+            <!-- LOADING -->
+            <ProgressBar
+                android:id="@+id/progressBar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="20dp"
+                android:visibility="gone" />
+
+            <!-- KẾT QUẢ -->
             <LinearLayout
                 android:id="@+id/layoutResult"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
+                android:layout_marginTop="28dp"
                 android:orientation="vertical"
                 android:visibility="gone"
                 tools:visibility="visible">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Outfit gợi ý"
-                    android:textColor="#1A1A1A"
-                    android:textSize="20sp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/tvResultInfo"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp"
-                    android:textColor="#8C8176"
-                    android:textSize="13sp"
-                    tools:text="Áo trong + Áo khoác + Quần" />
-
-                <com.google.android.material.card.MaterialCardView
-                    android:layout_width="match_parent"
-                    android:layout_height="360dp"
-                    android:layout_marginTop="16dp"
-                    app:cardBackgroundColor="#FFFFFF"
-                    app:cardCornerRadius="26dp"
-                    app:cardElevation="0dp"
-                    app:strokeColor="#EEE7DF"
-                    app:strokeWidth="1dp">
-
-                    <FrameLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:padding="18dp">
-
-                        <ImageView
-                            android:id="@+id/imgAoTrong"
-                            android:layout_width="145dp"
-                            android:layout_height="170dp"
-                            android:layout_gravity="top|start"
-                            android:layout_marginStart="8dp"
-                            android:layout_marginTop="34dp"
-                            android:adjustViewBounds="true"
-                            android:background="#00FFFFFF"
-                            android:scaleType="fitCenter"
-                            android:src="@drawable/fashion_banner"
-                            tools:src="@drawable/fashion_banner" />
-
-                        <ImageView
-                            android:id="@+id/imgAoKhoac"
-                            android:layout_width="145dp"
-                            android:layout_height="170dp"
-                            android:layout_gravity="top|end"
-                            android:layout_marginTop="28dp"
-                            android:layout_marginEnd="8dp"
-                            android:adjustViewBounds="true"
-                            android:scaleType="fitCenter"
-                            android:src="@drawable/fashion_banner"
-                            tools:src="@drawable/fashion_banner" />
-
-                        <ImageView
-                            android:id="@+id/imgQuan"
-                            android:layout_width="165dp"
-                            android:layout_height="210dp"
-                            android:layout_gravity="bottom|center_horizontal"
-                            android:layout_marginBottom="10dp"
-                            android:adjustViewBounds="true"
-                            android:scaleType="fitCenter"
-                            android:src="@drawable/fashion_banner"
-                            tools:src="@drawable/fashion_banner" />
-                    </FrameLayout>
-                </com.google.android.material.card.MaterialCardView>
-
                 <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Outfit gợi ý"
+                        android:textColor="#1A1A1A"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/tvResultInfo"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="#9A8F85"
+                        android:textSize="12sp"
+                        tools:text="6 gợi ý" />
+                </LinearLayout>
+
+                <!-- RECYCLERVIEW 2 CỘT -->
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rcvOutfits"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="14dp"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:id="@+id/tvAoTrongInfo"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:textColor="#1A1A1A"
-                        android:textSize="12sp"
-                        tools:text="Áo trong\nđen" />
-
-                    <TextView
-                        android:id="@+id/tvAoKhoacInfo"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:textColor="#1A1A1A"
-                        android:textSize="12sp"
-                        tools:text="Áo khoác\nđen" />
-
-                    <TextView
-                        android:id="@+id/tvQuanInfo"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:gravity="end"
-                        android:textColor="#1A1A1A"
-                        android:textSize="12sp"
-                        tools:text="Quần\nxanh" />
-                </LinearLayout>
-
-                <LinearLayout
+                    android:nestedScrollingEnabled="false"
+                    tools:listitem="@layout/fragment_item_outfit_card" />
+                <TextView
+                    android:id="@+id/tvEmpty"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
-                    android:orientation="horizontal">
+                    android:gravity="center"
+                    android:text="Không có outfit phù hợp"
+                    android:textColor="#8C8176"
+                    android:textSize="14sp"
+                    android:visibility="gone" />
 
-                    <com.google.android.material.button.MaterialButton
-                        android:id="@+id/btnMaleLink"
-                        android:layout_width="0dp"
-                        android:layout_height="52dp"
-                        android:layout_marginEnd="8dp"
-                        android:layout_weight="1"
-                        android:text="Link nam"
-                        android:textAllCaps="false"
-                        app:backgroundTint="#FFFFFF"
-                        app:cornerRadius="14dp"
-                        app:strokeColor="#E5DDD4"
-                        app:strokeWidth="1dp" />
-
-                    <com.google.android.material.button.MaterialButton
-                        android:id="@+id/btnFemaleLink"
-                        android:layout_width="0dp"
-                        android:layout_height="52dp"
-                        android:layout_marginStart="8dp"
-                        android:layout_weight="1"
-                        android:text="Link nữ"
-                        android:textAllCaps="false"
-                        app:backgroundTint="#FFFFFF"
-                        app:cornerRadius="14dp"
-                        app:strokeColor="#E5DDD4"
-                        app:strokeWidth="1dp" />
-                </LinearLayout>
             </LinearLayout>
+
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
+
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

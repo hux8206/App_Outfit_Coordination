@@ -1,7 +1,4 @@
 package com.example.outfitcoordination.Model
-
-import android.media.Image
-
 data class Clothes(
     val color : String = "",
     var favourite : Boolean = false,

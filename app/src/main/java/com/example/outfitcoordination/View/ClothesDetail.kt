@@ -22,7 +22,6 @@ class ClothesDetail : Fragment() {
     private var _binding : FragmentClothesDetailBinding? = null
     private val binding get() = _binding!!
     private val viewmodel : ClothesViewModel by activityViewModels()
-    private lateinit var clothesAdapter: ClothesAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
