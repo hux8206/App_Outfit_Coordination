@@ -17,5 +17,12 @@ data class OutfitUIModel(
 
     val aoTrongLink: String = "",
     val aoKhoacLink: String = "",
-    val quanLink: String = ""
+    val quanLink: String = "",
+
+    val userId: String = "",
+    val userName: String = "",
+
+    val public: Boolean = false,
+    val favorite: Boolean = false,
+    var outfitID : String = ""
 )
