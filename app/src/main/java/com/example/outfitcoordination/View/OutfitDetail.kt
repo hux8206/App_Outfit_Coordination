@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.MutableLiveData
 import com.bumptech.glide.Glide
@@ -20,7 +21,6 @@ class OutfitDetail : Fragment() {
     private var _binding : FragmentOutfitDetailBinding? = null
     private val binding get() = _binding!!
     private val viewmodel : CoordinateViewModel by viewModels()
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -45,6 +45,7 @@ class OutfitDetail : Fragment() {
         val compatibility = arguments?.getDouble("compatibility") ?: ""
         var favorite = arguments?.getBoolean("favorite") ?: false
         val outfitID = arguments?.getString("outfitID") ?: ""
+        var publicinfo = arguments?.getBoolean("public") ?: false
 
         Glide.with(requireContext()).load(aoTrongImage).into(binding.imgAoTrong)
         Glide.with(requireContext()).load(aoKhoacImage).into(binding.imgAoKhoac)
@@ -83,6 +84,18 @@ class OutfitDetail : Fragment() {
 
         binding.btnBackInOutfitDetail.setOnClickListener {
             parentFragmentManager.popBackStack()
+        }
+
+        binding.switchPublic.isChecked = publicinfo
+
+        binding.switchPublic.setOnCheckedChangeListener { _, isChecked ->
+            val currentOutfit = OutfitUIModel(outfitID = outfitID, public = publicinfo)
+            publicinfo = isChecked
+            viewmodel.togglePublicOutfit(currentOutfit,publicinfo)
+            Toast.makeText(requireContext(),
+                if(isChecked) "Đã được public" else "Đã hủy public",
+                Toast.LENGTH_SHORT
+            ).show()
         }
     }
 }
