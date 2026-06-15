@@ -15,7 +15,8 @@ import com.example.outfitcoordination.databinding.FragmentItemOutfitCardBinding
 class CoordinatAdapter(
     private val list: MutableList<OutfitUIModel>,
     private val onClickDetail: (OutfitUIModel) -> Unit,
-    private val onClickFavor : (OutfitUIModel) -> Unit
+    private val onClickFavor : (OutfitUIModel) -> Unit,
+    private val onClickPublic : (OutfitUIModel, Boolean) -> Unit
 ): RecyclerView.Adapter<CoordinatAdapter.OutfitViewHolder>()  {
 
     inner class OutfitViewHolder(
@@ -77,6 +78,18 @@ class CoordinatAdapter(
 
         holder.binding.btnFavoriteCoordinate.setOnClickListener {
             onClickFavor(item)
+        }
+
+        holder.binding.switchPublic.isChecked = item.public
+        holder.binding.switchPublic.setOnCheckedChangeListener { _, isChecked ->
+            onClickPublic(item,isChecked)
+        }
+
+        if(item.userName.isBlank()){
+            holder.binding.tvCreator.visibility = View.GONE
+        }else{
+            holder.binding.tvCreator.visibility = View.VISIBLE
+            holder.binding.tvCreator.text = "Tạo bởi: ${item.userName}"
         }
     }
 

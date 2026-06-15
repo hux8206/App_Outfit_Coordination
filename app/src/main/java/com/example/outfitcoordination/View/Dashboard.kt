@@ -54,12 +54,12 @@ class Dashboard : Fragment() {
         ) {clothes ->
             viewmodel.toggleFavor(clothes){isSuccess->
                 if(isSuccess){
-                    val message = if (clothes.favourite) "Da them vao tu do" else "da xoa khoi tu do"
+                    val message = if (clothes.favourite) "Đã thêm vào tủ đồ" else "Đã xóa khỏi tủ đồ"
                     Toast.makeText(requireContext(),message, Toast.LENGTH_SHORT).show()
                     clothesAdapter.notifyDataSetChanged()
                 }else{
                     clothes.favourite = !clothes.favourite
-                    Toast.makeText(requireContext(), "da xay ra loi !!", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(requireContext(), "Đã xảy ra lỗi !!", Toast.LENGTH_SHORT).show()
                 }
             }
         }

@@ -56,6 +56,15 @@
             android:textColor="#4CAF50"/>
 
         <TextView
+            android:id="@+id/tvCreator"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="Tạo bởi: Unknown"
+            android:textColor="#757575"
+            android:textSize="13sp"/>
+
+        <TextView
             android:id="@+id/tvInfo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -64,27 +73,41 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center_vertical"
+            android:orientation="vertical"
             android:paddingTop="12dp">
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnDetail"
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="48dp"
-                android:layout_weight="1"
                 android:text="Xem chi tiết"
                 android:textAllCaps="false"
                 app:cornerRadius="14dp"/>
 
-            <ImageView
-                android:id="@+id/btnFavoriteCoordinate"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_marginStart="10dp"
-                android:background="@drawable/bg_circle"
-                android:padding="8dp"
-                android:src="@drawable/ic_heart"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <androidx.appcompat.widget.SwitchCompat
+                    android:id="@+id/switchPublic"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Public outfit"
+                    android:textSize="12sp"/>
+
+                <ImageView
+                    android:id="@+id/btnFavoriteCoordinate"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:background="@drawable/bg_circle"
+                    android:padding="8dp"
+                    android:src="@drawable/ic_heart"/>
+            </LinearLayout>
+
         </LinearLayout>
 
     </LinearLayout>

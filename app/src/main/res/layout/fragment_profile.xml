@@ -96,6 +96,7 @@
                         android:orientation="vertical">
 
                         <TextView
+                            android:id="@+id/numofpost"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="24"
@@ -120,6 +121,7 @@
                         android:orientation="vertical">
 
                         <TextView
+                            android:id="@+id/numofoutfit"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="48"
@@ -144,6 +146,7 @@
                         android:orientation="vertical">
 
                         <TextView
+                            android:id="@+id/numofclothes"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="12"
@@ -155,7 +158,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="4dp"
-                            android:text="Lookbooks"
+                            android:text="Wardrobe"
                             android:textColor="#999999"
                             android:textSize="12sp" />
                     </LinearLayout>

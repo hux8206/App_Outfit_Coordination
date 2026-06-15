@@ -1,6 +1,7 @@
 package com.example.outfitcoordination.View
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -50,13 +51,19 @@ class Favorites : Fragment() {
                 bundle.putDouble("compatibility",outfit.compatibility)
                 bundle.putBoolean("favorite",outfit.favorite)
                 bundle.putString("outfitID",outfit.outfitID)
+                bundle.putBoolean("public",outfit.public)
 
                 detail.arguments = bundle
                 (requireActivity() as MainActivity).loadFragment(detail)
+            },
+            onClickFavor = {outfit ->
+                viewmodel.toggleFavor(outfit)
+            },
+
+            onClickPublic = {outfit, isChecked ->
+                viewmodel.togglePublicOutfit(outfit,isChecked)
             }
-        ){outfit ->
-            viewmodel.removeFavorOutfit(outfit)
-        }
+        )
 
         binding.rvFavorites.layoutManager = GridLayoutManager(requireContext(), 1)
         binding.rvFavorites.setHasFixedSize(false)
@@ -64,6 +71,7 @@ class Favorites : Fragment() {
 
         obserData()
         viewmodel.getFavorOutfit()
+
     }
 
     private fun obserData(){
@@ -71,7 +79,9 @@ class Favorites : Fragment() {
             outfitlist.clear()
             outfitlist.addAll(list)
             adapter.notifyDataSetChanged()
-
+            viewmodel.favorOutfit.observe(viewLifecycleOwner){ list ->
+                binding.tvItemCount.text = "${list.size} outfit"
+            }
             if (list.isEmpty()) {
                 binding.tvEmpty.visibility = View.VISIBLE
                 binding.rvFavorites.visibility = View.GONE
