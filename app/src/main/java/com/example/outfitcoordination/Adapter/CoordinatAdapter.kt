@@ -6,10 +6,17 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.example.outfitcoordination.DisplayFormatter
 import com.example.outfitcoordination.Model.OutfitUIModel
+import com.example.outfitcoordination.R
+import com.example.outfitcoordination.View.OutfitDetail
 import com.example.outfitcoordination.databinding.FragmentItemOutfitCardBinding
 
-class CoordinatAdapter(private val list: MutableList<OutfitUIModel>): RecyclerView.Adapter<CoordinatAdapter.OutfitViewHolder>()  {
+class CoordinatAdapter(
+    private val list: MutableList<OutfitUIModel>,
+    private val onClickDetail: (OutfitUIModel) -> Unit,
+    private val onClickFavor : (OutfitUIModel) -> Unit
+): RecyclerView.Adapter<CoordinatAdapter.OutfitViewHolder>()  {
 
     inner class OutfitViewHolder(
         val binding : FragmentItemOutfitCardBinding
@@ -28,7 +35,6 @@ class CoordinatAdapter(private val list: MutableList<OutfitUIModel>): RecyclerVi
         position: Int
     ) {
         val item = list[position]
-        Log.d("ADAPTER", "Bind position $position: ${list[position].aoTrongName}")
         Glide.with(holder.itemView.context)
             .load(item.aoTrongImage)
             .into(holder.binding.imgAoTrong)
@@ -45,8 +51,33 @@ class CoordinatAdapter(private val list: MutableList<OutfitUIModel>): RecyclerVi
         }else{
             holder.binding.imgAoKhoac.visibility = View.GONE
         }
+        holder.binding.btnDetail.setOnClickListener {
+            onClickDetail(item)
+        }
         holder.binding.tvCompatibility.text = "${item.compatibility.toInt()}%"
-        holder.binding.tvInfo.text = "${item.aoTrongName} ${item.mauAoTrong} • " + "${item.aoKhoacName} ${item.mauAoKhoac} • " + "${item.quanName} ${item.mauQuan}"
+        val aoTrongText = "${DisplayFormatter.clothesName(item.aoTrongName)} " + "${DisplayFormatter.clothesName(item.mauAoTrong)}"
+        val quanText = "${DisplayFormatter.clothesName(item.quanName)} " + "${DisplayFormatter.clothesName(item.mauQuan)}"
+        val aoKhoacText =
+            if (item.aoKhoacName != "khong_co" && item.mauAoKhoac != "khong_co") {
+                " • " + "${DisplayFormatter.clothesName(item.aoKhoacName)} " + "${DisplayFormatter.clothesName(item.mauAoKhoac)}"
+            } else {
+                ""
+            }
+        holder.binding.tvInfo.text = aoTrongText + aoKhoacText + " • " + quanText
+
+        if(item.favorite){
+            holder.binding.btnFavoriteCoordinate.setImageResource(
+                R.drawable.ic_heart_fill
+            )
+        }else{
+            holder.binding.btnFavoriteCoordinate.setImageResource(
+                R.drawable.ic_heart
+            )
+        }
+
+        holder.binding.btnFavoriteCoordinate.setOnClickListener {
+            onClickFavor(item)
+        }
     }
 
     override fun getItemCount(): Int {
