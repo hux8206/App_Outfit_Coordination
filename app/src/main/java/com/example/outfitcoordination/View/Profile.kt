@@ -41,6 +41,14 @@ class Profile : Fragment() {
 
             (requireActivity() as MainActivity).loadFragment(Dashboard())
         }
+
+        binding.btnFavorites.setOnClickListener {
+            (requireActivity() as MainActivity).loadFragment(Favorites())
+        }
+
+        binding.btnWardrobe.setOnClickListener {
+            (requireActivity() as MainActivity).loadFragment(Wardrobe())
+        }
     }
 
     override fun onDestroyView() {
