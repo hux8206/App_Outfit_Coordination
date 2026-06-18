@@ -95,7 +95,9 @@ class Login : Fragment() {
                         (requireActivity() as MainActivity).loadFragment(fragment)
                     }
             }else{
-                Toast.makeText(requireContext(),"dang nhap that bai", Toast.LENGTH_SHORT).show()
+                viewmodel.error.observe(viewLifecycleOwner){ error ->
+                    Toast.makeText(requireContext(), error, Toast.LENGTH_LONG).show()
+                }
             }
         }
 

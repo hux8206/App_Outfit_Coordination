@@ -86,7 +86,15 @@ class OutfitDetail : Fragment() {
             parentFragmentManager.popBackStack()
         }
 
+        val creatorUid = arguments?.getString("userId") ?: ""
+        val currentUid = com.google.firebase.auth.FirebaseAuth.getInstance().currentUser?.uid
         binding.switchPublic.isChecked = publicinfo
+
+        if (outfitID.isNotBlank() && creatorUid != currentUid) {
+            binding.switchPublic.isEnabled = false
+        } else {
+            binding.switchPublic.isEnabled = true
+        }
 
         binding.switchPublic.setOnCheckedChangeListener { _, isChecked ->
             val currentOutfit = OutfitUIModel(outfitID = outfitID, public = publicinfo)

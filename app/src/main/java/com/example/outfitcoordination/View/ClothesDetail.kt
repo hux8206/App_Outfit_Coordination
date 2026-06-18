@@ -40,6 +40,7 @@ class ClothesDetail : Fragment() {
         val linkfemale = arguments?.getString("female") ?: ""
         val id = arguments?.getString("id") ?: ""
         var favour = arguments?.getBoolean("favourite") ?: false
+        var isPublic = arguments?.getBoolean("public") ?: false
 
         binding.txtname.text = DisplayFormatter.clothesName(name)
         val drawable = binding.viewColor.background.mutate() as GradientDrawable
@@ -79,6 +80,18 @@ class ClothesDetail : Fragment() {
                     Toast.makeText(requireContext(),"loi !!", Toast.LENGTH_SHORT).show()
                 }
             }
+        }
+
+        binding.switchPublicClothes.isChecked = isPublic
+
+        binding.switchPublicClothes.setOnCheckedChangeListener { _, isChecked ->
+            val currentClothes = Clothes(id = id, public = isPublic)
+            isPublic = isChecked
+            viewmodel.togglePublicClothes(currentClothes,isPublic)
+            Toast.makeText(requireContext(),
+                if(isChecked) "Đã được public" else "Đã hủy public",
+                Toast.LENGTH_SHORT
+            ).show()
         }
     }
 }

@@ -11,7 +11,8 @@ import com.example.outfitcoordination.databinding.ItemOutfitDashboardBinding
 class ClothesAdapter(
     private val list: List<Clothes>,
     private val onItemClick : (Clothes)->Unit,
-    private val onCLickFavor : (Clothes) -> Unit
+    private val onCLickFavor : (Clothes) -> Unit,
+    private val onClickPublic : (Clothes, Boolean) -> Unit
 ) : RecyclerView.Adapter<ClothesAdapter.ClothesViewHolder>() {
     inner class ClothesViewHolder(val binding: ItemOutfitDashboardBinding) : RecyclerView.ViewHolder(binding.root)
 
@@ -36,17 +37,17 @@ class ClothesAdapter(
         }
 
         if(item.favourite){
-            holder.binding.btnFavorite.setImageResource(
-                R.drawable.ic_heart_fill
-            )
+            holder.binding.btnFavorite.setImageResource(R.drawable.ic_heart_fill)
         }else{
-            holder.binding.btnFavorite.setImageResource(
-                R.drawable.ic_heart
-            )
+            holder.binding.btnFavorite.setImageResource(R.drawable.ic_heart)
         }
-
         holder.binding.btnFavorite.setOnClickListener {
             onCLickFavor(item)
+        }
+
+        holder.binding.switchPublicClothes.isChecked = item.public
+        holder.binding.switchPublicClothes.setOnCheckedChangeListener { _, isChecked ->
+            onClickPublic(item,isChecked)
         }
     }
 

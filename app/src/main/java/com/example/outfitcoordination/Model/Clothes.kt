@@ -8,5 +8,6 @@ data class Clothes(
     val male : String = "",
     var id : String ="",
     val type : String = "",
-    val name : String = ""
+    val name : String = "",
+    var userId: String = ""
 )

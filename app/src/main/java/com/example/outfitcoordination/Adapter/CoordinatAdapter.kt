@@ -80,7 +80,20 @@ class CoordinatAdapter(
             onClickFavor(item)
         }
 
+        val currentUid = com.google.firebase.auth.FirebaseAuth.getInstance().currentUser?.uid
+        holder.binding.switchPublic.setOnCheckedChangeListener(null)
         holder.binding.switchPublic.isChecked = item.public
+
+        if (item.outfitID.isBlank()) {
+            holder.binding.switchPublic.isEnabled = false
+            holder.binding.switchPublic.alpha = 0.5f
+        }else if (item.userId != currentUid) {
+            holder.binding.switchPublic.isEnabled = false
+            holder.binding.switchPublic.alpha = 0.5f
+        }else {
+            holder.binding.switchPublic.isEnabled = true
+            holder.binding.switchPublic.alpha = 1.0f
+        }
         holder.binding.switchPublic.setOnCheckedChangeListener { _, isChecked ->
             onClickPublic(item,isChecked)
         }

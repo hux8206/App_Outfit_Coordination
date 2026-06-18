@@ -53,7 +53,7 @@ class Profile : Fragment() {
 
         val uid = auth.currentUser?.uid
         FirebaseFirestore.getInstance()
-            .collection("outfits")
+            .collection("favorite_outfits")
             .whereEqualTo("userId", uid)
             .get()
             .addOnSuccessListener {
@@ -62,6 +62,7 @@ class Profile : Fragment() {
         FirebaseFirestore.getInstance()
             .collection("clothes")
             .whereEqualTo("favourite",true)
+            .whereEqualTo("userId",uid)
             .get()
             .addOnSuccessListener {
                 binding.numofclothes.text = it.size().toString()

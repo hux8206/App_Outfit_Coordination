@@ -119,6 +119,10 @@ class Coordinate : Fragment() {
 
             }, 3000)
         }
+
+        binding.btnFilter.setOnClickListener {
+            (requireActivity() as MainActivity).loadFragment(ManualCoordinate())
+        }
     }
     private fun setupDropdowns() {
         binding.dropdownSkin.setAdapter(

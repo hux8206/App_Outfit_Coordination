@@ -47,22 +47,30 @@ class Dashboard : Fragment() {
                 bundle.putString("color",clothes.color)
                 bundle.putBoolean("favourite",clothes.favourite)
                 bundle.putString("id",clothes.id)
+                bundle.putBoolean("public",clothes.public)
+                bundle.putString("userId",clothes.userId)
 
                 detail.arguments = bundle
                 (requireActivity() as MainActivity).loadFragment(detail)
-            }
-        ) {clothes ->
-            viewmodel.toggleFavor(clothes){isSuccess->
-                if(isSuccess){
-                    val message = if (clothes.favourite) "Đã thêm vào tủ đồ" else "Đã xóa khỏi tủ đồ"
-                    Toast.makeText(requireContext(),message, Toast.LENGTH_SHORT).show()
-                    clothesAdapter.notifyDataSetChanged()
-                }else{
-                    clothes.favourite = !clothes.favourite
-                    Toast.makeText(requireContext(), "Đã xảy ra lỗi !!", Toast.LENGTH_SHORT).show()
+            },
+
+            onCLickFavor = { clothes ->
+                viewmodel.toggleFavor(clothes) { isSuccess ->
+                    if (isSuccess) {
+                        clothes.favourite = !clothes.favourite
+                        val message = if (clothes.favourite) "Đã thêm vào tủ đồ" else "Đã xóa khỏi tủ đồ"
+                        Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
+                        clothesAdapter.notifyDataSetChanged()
+                    } else {
+                        Toast.makeText(requireContext(), "Đã xảy ra lỗi !!", Toast.LENGTH_SHORT).show()
+                    }
                 }
+            },
+
+            onClickPublic = {clothes, isChecked ->
+                viewmodel.togglePublicClothes(clothes,isChecked)
             }
-        }
+        )
 
         binding.rvOutfits.layoutManager = GridLayoutManager(requireContext(), 2)
         binding.rvOutfits.adapter = clothesAdapter
