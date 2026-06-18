@@ -45,9 +45,7 @@ class Login : Fragment() {
 
         binding.btnClose.setOnClickListener {
             bottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
-
             binding.logemail.clearFocus()
-
             val imm = requireContext().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
             imm.hideSoftInputFromWindow(view.windowToken, 0)
         }
@@ -72,30 +70,42 @@ class Login : Fragment() {
         binding.login.setOnClickListener {
             val email = binding.logemail.text.toString().trim()
             val password = binding.logpassword.text.toString().trim()
-
             viewmodel.login(email,password)
         }
 
         viewmodel.SuccessLogin.observe(viewLifecycleOwner){success ->
             if(success){
-                Toast.makeText(requireContext(),"dang nhap thanh cong", Toast.LENGTH_SHORT).show()
-                FirebaseFirestore.getInstance()
-                    .collection("users")
-                    .document(FirebaseAuth.getInstance().currentUser!!.uid)
-                    .get()
-                    .addOnSuccessListener { document ->
+                val currentUser = FirebaseAuth.getInstance().currentUser
+                if (currentUser != null) {
+                    FirebaseFirestore.getInstance()
+                        .collection("users")
+                        .document(currentUser.uid)
+                        .get()
+                        .addOnSuccessListener { document ->
+                            if (document != null && document.exists()) {
+                                val role = document.getString("role")
+                                // Lấy state an toàn, mặc định là 1 nếu null
+                                val state = document.getLong("state")?.toInt() ?: 1
 
-                        val role = document.getString("role")
-
-                        val fragment = if (role == "admin") {
-                            Admin()
-                        } else {
-                            Dashboard()
+                                // NẾU TÀI KHOẢN BỊ KHÓA
+                                if (state == 0) {
+                                    FirebaseAuth.getInstance().signOut()
+                                    Toast.makeText(requireContext(), "Tài khoản của bạn đã bị vô hiệu hóa!", Toast.LENGTH_LONG).show()
+                                } else {
+                                    // TÀI KHOẢN BÌNH THƯỜNG
+                                    Toast.makeText(requireContext(),"Đăng nhập thành công", Toast.LENGTH_SHORT).show()
+                                    val fragment = if (role == "admin") {
+                                        Admin()
+                                    } else {
+                                        Dashboard()
+                                    }
+                                    (requireActivity() as MainActivity).loadFragment(fragment)
+                                }
+                            }
                         }
-                        (requireActivity() as MainActivity).loadFragment(fragment)
-                    }
+                }
             }else{
-                Toast.makeText(requireContext(),"dang nhap that bai", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(),"Đăng nhập thất bại", Toast.LENGTH_SHORT).show()
             }
         }
 
