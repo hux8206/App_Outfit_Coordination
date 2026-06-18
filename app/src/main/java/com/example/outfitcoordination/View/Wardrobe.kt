@@ -46,21 +46,30 @@ class Wardrobe : Fragment() {
                 bundle.putString("color",clothes.color)
                 bundle.putBoolean("favourite",clothes.favourite)
                 bundle.putString("id",clothes.id)
+                bundle.putBoolean("public",clothes.public)
+                bundle.putString("userId",clothes.userId    )
 
                 detail.arguments = bundle
                 (requireActivity() as MainActivity).loadFragment(detail)
-            }
-        ) {clothes ->
-            viewmodel.toggleFavor(clothes){isSuccess->
-                if(isSuccess){
-                    val message = if (clothes.favourite) "Da them vao tu do" else "da xoa khoi tu do"
-                    Toast.makeText(requireContext(),message, Toast.LENGTH_SHORT).show()
-                }else{
-                    clothes.favourite = !clothes.favourite
-                    Toast.makeText(requireContext(), "da xay ra loi !!", Toast.LENGTH_SHORT).show()
+            },
+
+            onCLickFavor = { clothes ->
+                viewmodel.toggleFavor(clothes) { isSuccess ->
+                    if (isSuccess) {
+                        clothes.favourite = !clothes.favourite
+                        val message = if (clothes.favourite) "Đã thêm vào tủ đồ" else "Đã xóa khỏi tủ đồ"
+                        Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
+                        clothesAdapter.notifyDataSetChanged()
+                    } else {
+                        Toast.makeText(requireContext(), "Đã xảy ra lỗi !!", Toast.LENGTH_SHORT).show()
+                    }
                 }
+            },
+
+            onClickPublic = {clothes, isChecked ->
+                viewmodel.togglePublicClothes(clothes,isChecked)
             }
-        }
+        )
 
         binding.rvWardrobe.layoutManager = GridLayoutManager(requireContext(),2)
         binding.rvWardrobe.adapter = clothesAdapter
@@ -68,6 +77,24 @@ class Wardrobe : Fragment() {
 
         obserData()
         viewmodel.loadFavorClothes()
+
+        if (viewmodel.clothes.value == null){
+            viewmodel.loadClothes()
+        }
+
+        binding.wrAll.setOnClickListener {
+            viewmodel.filterClothesFavor("all")
+        }
+        binding.wrAotrong.setOnClickListener {
+            viewmodel.filterClothesFavor("ao_trong")
+        }
+        binding.wrAokhoac.setOnClickListener {
+            viewmodel.filterClothesFavor("ao_khoac")
+        }
+        binding.wrTrouser.setOnClickListener {
+            viewmodel.filterClothesFavor("quan")
+        }
+
     }
 
     private fun obserData(){

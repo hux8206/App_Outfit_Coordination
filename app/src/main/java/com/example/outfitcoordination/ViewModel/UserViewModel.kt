@@ -14,6 +14,9 @@ class UserViewModel: ViewModel(){
     private val _SuccessLogin = MutableLiveData<Boolean>()
     val SuccessRegister : LiveData<Boolean> = _SuccessRegister //nhan gia tri tu _success va truyen qua lai UI de hien thi
     val SuccessLogin : LiveData<Boolean> = _SuccessLogin
+    private val _error = MutableLiveData<String>()
+
+    val error: LiveData<String> = _error
     fun register(name : String, email : String, password: String){ //lay du lieu tu ui
         val user = User(          //tao user de truyen qua repository
             name = name,
@@ -23,13 +26,25 @@ class UserViewModel: ViewModel(){
         )
 
         viewModelScope.launch {
-            _SuccessRegister.value = repository.register(user,password) //nhan tra gia true or false duoc authen tra ve, sau do truyen len success
+            val result = repository.register(user, password)
+            if(result.isSuccess){
+                _SuccessRegister.value = true
+            }else{
+                _SuccessRegister.value = false
+                _error.value = result.exceptionOrNull()?.message ?: "Đăng ký thất bại"
+            }
         }
     }
 
-    fun login(email: String, password: String){
+    fun login(email: String, password: String) {
         viewModelScope.launch {
-            _SuccessLogin.value = repository.login(email,password)
+            val result = repository.login(email, password)
+            if (result.isSuccess) {
+                _SuccessLogin.value = true
+            } else {
+                _SuccessLogin.value = false
+                _error.value = result.exceptionOrNull()?.message ?: "Đăng nhập thất bại"
+            }
         }
     }
 }

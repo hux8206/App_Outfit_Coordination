@@ -7,15 +7,12 @@ import android.provider.Telephony
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import com.example.outfitcoordination.View.Admin
 import com.example.outfitcoordination.View.Coordinate
 import com.example.outfitcoordination.View.Dashboard
 import com.example.outfitcoordination.View.Fashion
 import com.example.outfitcoordination.View.Favorites
 import com.example.outfitcoordination.View.GuestProfile
 import com.example.outfitcoordination.View.Login
-import com.example.outfitcoordination.View.ManageClothes
-import com.example.outfitcoordination.View.ManageUser
 import com.example.outfitcoordination.View.Profile
 import com.example.outfitcoordination.View.Register
 import com.example.outfitcoordination.View.Wardrobe
@@ -85,7 +82,7 @@ class MainActivity : AppCompatActivity() {
             .replace(R.id.fragmentContainer, fragment)
             .addToBackStack(null)
             .commit()
-        val hideNav = fragment is Login || fragment is Register || fragment is Admin || fragment is ManageUser || fragment is ManageClothes
+        val hideNav = fragment is Login || fragment is Register
         binding.bottomAppBar.visibility = if (hideNav) View.GONE else View.VISIBLE
         binding.fabFavorite.visibility = if (hideNav) View.GONE else View.VISIBLE
     }

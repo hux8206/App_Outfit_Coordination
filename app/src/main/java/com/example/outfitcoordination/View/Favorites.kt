@@ -52,6 +52,7 @@ class Favorites : Fragment() {
                 bundle.putBoolean("favorite",outfit.favorite)
                 bundle.putString("outfitID",outfit.outfitID)
                 bundle.putBoolean("public",outfit.public)
+                bundle.putString("userId",outfit.userId)
 
                 detail.arguments = bundle
                 (requireActivity() as MainActivity).loadFragment(detail)
@@ -79,9 +80,7 @@ class Favorites : Fragment() {
             outfitlist.clear()
             outfitlist.addAll(list)
             adapter.notifyDataSetChanged()
-            viewmodel.favorOutfit.observe(viewLifecycleOwner){ list ->
-                binding.tvItemCount.text = "${list.size} outfit"
-            }
+            binding.tvItemCount.text = "${list.size} outfit"
             if (list.isEmpty()) {
                 binding.tvEmpty.visibility = View.VISIBLE
                 binding.rvFavorites.visibility = View.GONE

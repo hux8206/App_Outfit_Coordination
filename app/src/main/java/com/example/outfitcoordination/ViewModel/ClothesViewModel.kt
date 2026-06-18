@@ -12,12 +12,16 @@ class ClothesViewModel : ViewModel() {
     private val repository = ClothesRepository()
     private val _clothes = MutableLiveData<List<Clothes>>()
     private val _wrClothes = MutableLiveData<List<Clothes>>()
+    private val _publicClothes = MutableLiveData<List<Clothes>>()
     private val allClothesList = mutableListOf<Clothes>()
     val clothes : LiveData<List<Clothes>>get() = _clothes
     val wrClothes : LiveData<List<Clothes>>get() = _wrClothes
+    val publicClothes : LiveData<List<Clothes>>get() = _publicClothes
     private var currentlist = "all"
-    fun loadClothes(){
-        repository.getClothes { list ->
+    private val _error = MutableLiveData<String?>()
+    val error : LiveData<String?>get() = _error
+    fun loadClothes() {
+        repository.getClothesForCurrentUser { list ->
             allClothesList.clear()
             allClothesList.addAll(list)
 
@@ -25,13 +29,14 @@ class ClothesViewModel : ViewModel() {
         }
     }
 
-    fun loadFavorClothes(){
-        repository.getClothes { list ->
-            allClothesList.clear()
-            allClothesList.addAll(list)
-
-            _wrClothes.value = list.filter { it.favourite }
+    fun getClothesPublic(){
+        viewModelScope.launch {
+            _publicClothes.value = repository.getClothesPublic()
         }
+    }
+
+    fun loadFavorClothes() {
+        filterClothesFavor("all")
     }
 
     fun filterClothes(category : String) {
@@ -52,6 +57,31 @@ class ClothesViewModel : ViewModel() {
                 it.type in listOf("quan")
             }
             else -> allClothesList
+        }
+    }
+
+    fun filterClothesFavor(category : String) {
+        currentlist = category
+
+        val favorList = allClothesList.filter {
+            it.favourite
+        }
+
+        _wrClothes.value = when (category){
+            "all" -> favorList
+
+            "ao_trong" -> favorList.filter {
+                it.type in listOf("ao_trong")
+            }
+
+            "ao_khoac" -> favorList.filter {
+                it.type in listOf("ao_khoac")
+            }
+
+            "quan" -> favorList.filter {
+                it.type in listOf("quan")
+            }
+            else -> favorList
         }
     }
 
@@ -90,16 +120,60 @@ class ClothesViewModel : ViewModel() {
         }.joinToString("")
     }
 
-    fun toggleFavor(clothes: Clothes, onComplete : (Boolean) -> Unit){
-        val nextFavorStatus = !clothes.favourite
-        viewModelScope.launch {
-            repository.updateFavor(clothes.id,nextFavorStatus){issuccess ->
-                if (issuccess) {
-                    clothes.favourite = nextFavorStatus
-                    allClothesList.find { it.id == clothes.id }?.favourite = nextFavorStatus
-                    filterClothes(currentlist)
+    fun toggleFavor(
+        clothes: Clothes,
+        onComplete: (Boolean) -> Unit
+    ) {
+        val newState = !clothes.favourite // Tính toán trạng thái trái tim mới
+
+        repository.updateFavor(clothes) { isSuccess ->
+            if (isSuccess) {
+                // 1. Cập nhật danh sách tổng và Tủ đồ
+                allClothesList.find { it.id == clothes.id }?.favourite = newState
+                filterClothes(currentlist)
+
+                // 2. ĐÃ THÊM: Đồng bộ trạng thái tim sang màn Fashion (Tab Public)
+                _publicClothes.value = _publicClothes.value?.map {
+                    if (it.id == clothes.id) it.copy(favourite = newState) else it
                 }
-                onComplete(issuccess)
+            }
+            onComplete(isSuccess)
+        }
+    }
+
+    fun togglePublicClothes(
+        clothes : Clothes,
+        isPublic: Boolean
+    ) {
+        if (clothes.id.isBlank()) return
+
+        // ĐÃ XÓA DÒNG VALIDATE `userId != currentUid` Ở ĐÂY ĐỂ AI CŨNG BẬT/TẮT ĐƯỢC
+
+        viewModelScope.launch {
+            try {
+                repository.updataSwitchOutfit(clothes.id, isPublic)
+
+                // 1. Cập nhật lại danh sách Tủ đồ cá nhân
+                allClothesList.find { it.id == clothes.id }?.public = isPublic
+                val current = _clothes.value ?: return@launch
+                _clothes.value = current.map {
+                    if(it.id == clothes.id){
+                        it.copy(public = isPublic)
+                    }else{
+                        it
+                    }
+                }
+
+                // 2. ĐÃ THÊM: Xử lý logic cho Tab Fashion
+                if (isPublic) {
+                    // Nếu vừa bật Public -> Tải lại danh sách Fashion để hiển thị món đồ mới
+                    getClothesPublic()
+                } else {
+                    // Nếu vừa tắt Public -> Xóa món đồ đó khỏi danh sách Fashion ngay lập tức
+                    _publicClothes.value = _publicClothes.value?.filter { it.id != clothes.id }
+                }
+            } catch (e: Exception) {
+                _error.value = e.message
             }
         }
     }

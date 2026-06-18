@@ -56,32 +56,40 @@ class CoordinateViewModel: ViewModel() {
         }
     }
 
-    fun toggleFavor(outfit : OutfitUIModel){
+    fun toggleFavor(outfit: OutfitUIModel) {
         viewModelScope.launch {
-            try{
-                val currentList = _outfits.value ?: return@launch
+            try {
+                if (!outfit.favorite) {
+                    val currentOutfitID = if (outfit.outfitID.isBlank()) {
+                        repository.saveOutfit(outfit)
+                    } else {
+                        outfit.outfitID
+                    }
 
-                if (!outfit.favorite){
-                    val outfitID = repository.saveOutfit(outfit)
-
-                    _outfits.value = currentList.map {
-                        if (it == outfit){
-                            it.copy(favorite = true, outfitID = outfitID)
-                        }else{
+                    // Lưu vào collection favorite_outfits
+                    repository.toggleFavoriteOutfit(
+                        outfit.copy(outfitID = currentOutfitID, favorite = false)
+                    )
+                    val mapFunc = { it: OutfitUIModel ->
+                        if (it.outfitID == currentOutfitID || it == outfit) {
+                            it.copy(favorite = true, outfitID = currentOutfitID)
+                        } else {
                             it
                         }
                     }
-                }else{
-                    repository.deleteOutfit(outfit.outfitID)
-                    _outfits.value = currentList.map {
-                        if (it == outfit){
-                            it.copy(favorite = false, outfitID = "")
-                        }else{
-                            it
-                        }
+                    _outfits.value = _outfits.value?.map(mapFunc)
+                    _publicOutfit.value = _publicOutfit.value?.map(mapFunc)
+
+                } else {
+                    repository.toggleFavoriteOutfit(outfit)
+                    val mapFunc = { it: OutfitUIModel ->
+                        if (it.outfitID == outfit.outfitID) it.copy(favorite = false) else it
                     }
+                    _outfits.value = _outfits.value?.map(mapFunc)
+                    _publicOutfit.value = _publicOutfit.value?.map(mapFunc)
+                    _favorOutfit.value = _favorOutfit.value?.filter { it.outfitID != outfit.outfitID }
                 }
-            }catch(e : Exception){
+            } catch (e: Exception) {
                 _error.value = e.message
             }
         }
@@ -92,7 +100,7 @@ class CoordinateViewModel: ViewModel() {
             repository.deleteOutfit(outfit.outfitID)
             val currentList = _outfits.value ?: emptyList()
             _outfits.value = currentList.filter {
-                it.outfitID != outfit.outfitID // giu lai cac outfit khac outfit vua bam huy tim
+                it.outfitID != outfit.outfitID
             }
         }
     }
@@ -107,18 +115,23 @@ class CoordinateViewModel: ViewModel() {
         outfit: OutfitUIModel,
         isPublic: Boolean
     ) {
+        if (outfit.outfitID.isBlank()) return
 
+        val currentUid = com.google.firebase.auth.FirebaseAuth.getInstance().currentUser?.uid
+        if (outfit.userId != currentUid) {
+            _error.value = "Bạn không có quyền chỉnh sửa trạng thái Public của người khác!"
+            return
+        }
         viewModelScope.launch {
             repository.updataSwitchOutfit(outfit.outfitID, isPublic)
             val current = _outfits.value ?: return@launch
-            _outfits.value =
-                current.map {
+            _outfits.value = current.map {
                     if(it.outfitID == outfit.outfitID){
                         it.copy(public = isPublic)
                     }else{
                         it
                     }
-                }
+            }
         }
     }
 
@@ -126,5 +139,42 @@ class CoordinateViewModel: ViewModel() {
         viewModelScope.launch {
             _publicOutfit.value = repository.getOutfitPublic()
         }
+    }
+
+    fun saveManualOutfit(
+        aoTrong: com.example.outfitcoordination.Model.Clothes?,
+        aoKhoac: com.example.outfitcoordination.Model.Clothes?,
+        quan: com.example.outfitcoordination.Model.Clothes?,
+        onResult: (Boolean, String) -> Unit
+    ) {
+        if (aoTrong == null || quan == null) {
+            onResult(false, "Vui lòng chọn ít nhất 1 Áo trong và 1 Quần!")
+            return
+        }
+
+        val newOutfit = OutfitUIModel(
+            aoTrongImage = aoTrong.image,
+            aoKhoacImage = aoKhoac?.image ?: "",
+            quanImage = quan.image,
+
+            aoTrongName = aoTrong.name,
+            aoKhoacName = aoKhoac?.name ?: "khong_co",
+            quanName = quan.name,
+
+            mauAoTrong = aoTrong.color,
+            mauAoKhoac = aoKhoac?.color ?: "khong_co",
+            mauQuan = quan.color,
+
+            hasAoKhoac = aoKhoac != null,
+            compatibility = 100.0,
+
+            aoTrongLink = aoTrong.female.ifBlank { aoTrong.male },
+            aoKhoacLink = aoKhoac?.female?.ifBlank { aoKhoac.male } ?: "",
+            quanLink = quan.female.ifBlank { quan.male },
+
+            favorite = false
+        )
+        toggleFavor(newOutfit)
+        onResult(true, "Đã lưu bộ phối vào mục Yêu thích!")
     }
 }

@@ -66,20 +66,6 @@
                     app:singleSelection="true">
 
                     <com.google.android.material.chip.Chip
-                        android:id="@+id/chipAll"
-                        style="@style/Widget.MaterialComponents.Chip.Choice"
-                        android:layout_width="wrap_content"
-                        android:layout_height="42dp"
-                        android:checked="true"
-                        android:text="Tất cả"
-                        android:textColor="@color/chip_text_color"
-                        android:textStyle="bold"
-                        app:chipBackgroundColor="@color/chip_bg_color"
-                        app:chipCornerRadius="22dp"
-                        app:chipMinHeight="42dp"
-                        app:chipStrokeWidth="0dp" />
-
-                    <com.google.android.material.chip.Chip
                         android:id="@+id/chipOutfit"
                         style="@style/Widget.MaterialComponents.Chip.Choice"
                         android:layout_width="wrap_content"
@@ -97,7 +83,7 @@
                         style="@style/Widget.MaterialComponents.Chip.Choice"
                         android:layout_width="wrap_content"
                         android:layout_height="42dp"
-                        android:text="Quần áo &amp; Giày"
+                        android:text="Quần áo"
                         android:textColor="@color/chip_text_color"
                         android:textStyle="bold"
                         app:chipBackgroundColor="@color/chip_bg_color"

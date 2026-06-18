@@ -39,7 +39,9 @@ class Register : Fragment() {
                 parentFragmentManager.beginTransaction()
                     .replace(R.id.fragmentContainer, Login()).commit()
             }else{
-                Toast.makeText(requireContext(),"dang ki that bai", Toast.LENGTH_SHORT).show()
+                viewmodel.error.observe(viewLifecycleOwner){ error ->
+                    Toast.makeText(requireContext(), error, Toast.LENGTH_LONG).show()
+                }
             }
         }
 
