@@ -19,9 +19,8 @@ class CoordinatAdapter(
     private val onClickPublic : (OutfitUIModel, Boolean) -> Unit
 ): RecyclerView.Adapter<CoordinatAdapter.OutfitViewHolder>()  {
 
-    inner class OutfitViewHolder(
-        val binding : FragmentItemOutfitCardBinding
-    ) : RecyclerView.ViewHolder(binding.root)
+    inner class OutfitViewHolder(val binding : FragmentItemOutfitCardBinding)
+        : RecyclerView.ViewHolder(binding.root)
 
     override fun onCreateViewHolder(
         parent: ViewGroup,

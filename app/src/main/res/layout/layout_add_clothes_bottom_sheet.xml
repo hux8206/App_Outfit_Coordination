@@ -62,7 +62,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Tên món đồ"
+        android:text="Thông tin đồ"
         android:textColor="#1A1A1A"
         android:textSize="14sp"
         android:textStyle="bold"
@@ -73,7 +73,28 @@
         android:id="@+id/edtClothesName"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:hint="Ví dụ: Áo khoác dù chống nắng"
+        android:hint="Tên loại đồ"
+        android:paddingHorizontal="16dp"
+        android:textSize="14sp" />
+    <EditText
+        android:id="@+id/edtClothesColor"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:hint="màu sắc"
+        android:paddingHorizontal="16dp"
+        android:textSize="14sp" />
+    <EditText
+        android:id="@+id/edtMaleLink"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:hint="link đồ nam"
+        android:paddingHorizontal="16dp"
+        android:textSize="14sp" />
+    <EditText
+        android:id="@+id/edtFemaleLink"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:hint="link đồ nữ"
         android:paddingHorizontal="16dp"
         android:textSize="14sp" />
 

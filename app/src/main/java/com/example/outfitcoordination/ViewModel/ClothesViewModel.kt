@@ -124,15 +124,12 @@ class ClothesViewModel : ViewModel() {
         clothes: Clothes,
         onComplete: (Boolean) -> Unit
     ) {
-        val newState = !clothes.favourite // Tính toán trạng thái trái tim mới
+        val newState = !clothes.favourite
 
         repository.updateFavor(clothes) { isSuccess ->
             if (isSuccess) {
-                // 1. Cập nhật danh sách tổng và Tủ đồ
                 allClothesList.find { it.id == clothes.id }?.favourite = newState
                 filterClothes(currentlist)
-
-                // 2. ĐÃ THÊM: Đồng bộ trạng thái tim sang màn Fashion (Tab Public)
                 _publicClothes.value = _publicClothes.value?.map {
                     if (it.id == clothes.id) it.copy(favourite = newState) else it
                 }
@@ -147,13 +144,9 @@ class ClothesViewModel : ViewModel() {
     ) {
         if (clothes.id.isBlank()) return
 
-        // ĐÃ XÓA DÒNG VALIDATE `userId != currentUid` Ở ĐÂY ĐỂ AI CŨNG BẬT/TẮT ĐƯỢC
-
         viewModelScope.launch {
             try {
                 repository.updataSwitchOutfit(clothes.id, isPublic)
-
-                // 1. Cập nhật lại danh sách Tủ đồ cá nhân
                 allClothesList.find { it.id == clothes.id }?.public = isPublic
                 val current = _clothes.value ?: return@launch
                 _clothes.value = current.map {
@@ -164,12 +157,9 @@ class ClothesViewModel : ViewModel() {
                     }
                 }
 
-                // 2. ĐÃ THÊM: Xử lý logic cho Tab Fashion
                 if (isPublic) {
-                    // Nếu vừa bật Public -> Tải lại danh sách Fashion để hiển thị món đồ mới
                     getClothesPublic()
                 } else {
-                    // Nếu vừa tắt Public -> Xóa món đồ đó khỏi danh sách Fashion ngay lập tức
                     _publicClothes.value = _publicClothes.value?.filter { it.id != clothes.id }
                 }
             } catch (e: Exception) {

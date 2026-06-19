@@ -12,7 +12,8 @@ import com.example.outfitcoordination.R
 import com.example.outfitcoordination.ViewModel.AddClothesViewModel
 import com.example.outfitcoordination.databinding.LayoutAddClothesBottomSheetBinding
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
-
+import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.launch
 class AddClothesBottomSheet : BottomSheetDialogFragment() {
 
     private var _binding: LayoutAddClothesBottomSheetBinding? = null
@@ -20,11 +21,7 @@ class AddClothesBottomSheet : BottomSheetDialogFragment() {
 
     private val viewModel: AddClothesViewModel by viewModels()
     private var imageUri: Uri? = null
-
-    // Hàm gọi ngược để báo hiệu cho ManageClothes tải lại danh sách sau khi thêm thành công
     var onClothesAdded: (() -> Unit)? = null
-
-    // Bộ mở thư viện ảnh của máy
     private val pickImageLauncher = registerForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri? ->
         if (uri != null) {
             imageUri = uri
@@ -43,12 +40,9 @@ class AddClothesBottomSheet : BottomSheetDialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // Bấm chọn ảnh
         binding.cardSelectImage.setOnClickListener {
             pickImageLauncher.launch("image/*")
         }
-
-        // QUAN SÁT CÁC TRẠNG THÁI TỪ VIEWMODEL
         viewModel.isLoad.observe(viewLifecycleOwner) { isLoading ->
             if (isLoading) {
                 binding.btnSaveClothes.text = ""
@@ -64,16 +58,14 @@ class AddClothesBottomSheet : BottomSheetDialogFragment() {
         viewModel.isSuccess.observe(viewLifecycleOwner) { success ->
             if (success) {
                 Toast.makeText(requireContext(), "Thêm thành công!", Toast.LENGTH_SHORT).show()
-                onClothesAdded?.invoke() // Gọi hàm làm mới danh sách ngoài màn hình chính
-                dismiss() // Tắt bottom sheet
+                onClothesAdded?.invoke()
+                dismiss()
             }
         }
 
         viewModel.errorMessage.observe(viewLifecycleOwner) { error ->
             Toast.makeText(requireContext(), error, Toast.LENGTH_SHORT).show()
         }
-
-        // Bấm nút Lưu món đồ
         binding.btnSaveClothes.setOnClickListener {
             val name = binding.edtClothesName.text.toString().trim()
             val type = when (binding.chipGroupAddType.checkedChipId) {
@@ -83,13 +75,15 @@ class AddClothesBottomSheet : BottomSheetDialogFragment() {
                 else -> "ao_trong"
             }
 
+            val color = binding.edtClothesColor.text.toString().trim()
+            val maleLink = binding.edtMaleLink.text.toString().trim()
+            val femaleLink = binding.edtFemaleLink.text.toString().trim()
+
             if (name.isEmpty() || imageUri == null) {
                 Toast.makeText(requireContext(), "Vui lòng nhập đủ thông tin và ảnh!", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
-
-            // Giao việc lưu dữ liệu cho ViewModel xử lý
-            viewModel.addClothes(name, type, imageUri!!)
+            viewModel.addClothes(name, type, imageUri!!, color, maleLink, femaleLink)
         }
     }
 

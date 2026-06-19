@@ -1,27 +1,16 @@
 package com.example.outfitcoordination.Reponsitory
-import android.widget.Toast
+import android.net.Uri
+import com.cloudinary.android.MediaManager
 import com.example.outfitcoordination.Model.Clothes
-import com.example.outfitcoordination.View.Favorites
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.tasks.await
-
+import kotlin.coroutines.suspendCoroutine
+import com.cloudinary.android.callback.ErrorInfo
+import com.cloudinary.android.callback.UploadCallback
+import kotlin.coroutines.resume
 class ClothesRepository {
     private val db = FirebaseFirestore.getInstance()
-    fun getClothes(onResult : (List<Clothes>) -> Unit){
-        db.collection("clothes")
-            .get()
-            .addOnSuccessListener { result ->
-                val list = mutableListOf<Clothes>()
-                for (doc in result){
-                    val item = doc.toObject(Clothes::class.java)
-                    item.id = doc.id
-                    list.add(item)
-                }
-                onResult(list)
-            }
-    }
-
     fun updateFavor(
         clothes: Clothes,
         onComplete: (Boolean) -> Unit
@@ -108,16 +97,23 @@ class ClothesRepository {
         return publicList
     }
 
-    suspend fun getClothesFavor() : List<Clothes>{
-        val uid = FirebaseAuth.getInstance().currentUser?.uid ?: return emptyList()
-        val snapshot = db.collection("clothes")
-            .whereEqualTo("favourite",true)
-            .whereEqualTo("userId",uid)
-            .get()
-            .await()
-        return snapshot.documents.mapNotNull {doc ->
-            val clothes = doc.toObject(Clothes::class.java)
-            clothes?.copy(id = doc.id)
-        }
+    suspend fun uploadImageToCloudinary(imageUri: Uri): String? = suspendCoroutine { continuation ->
+        MediaManager.get().upload(imageUri)
+            .callback(object : UploadCallback {
+                override fun onStart(requestId: String) {}
+                override fun onProgress(requestId: String, bytes: Long, totalBytes: Long) {}
+
+                override fun onSuccess(requestId: String, resultData: Map<*, *>) {
+                    // Upload thành công -> Lấy link ảnh HTTPS
+                    val secureUrl = resultData["secure_url"] as? String
+                    continuation.resume(secureUrl)
+                }
+
+                override fun onError(requestId: String, error: ErrorInfo) {
+                    // Báo lỗi nếu upload thất bại
+                    continuation.resume(null)
+                }
+                override fun onReschedule(requestId: String, error: ErrorInfo) {}
+            }).dispatch()
     }
 }
